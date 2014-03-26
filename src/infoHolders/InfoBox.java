@@ -6,8 +6,6 @@
 package infoHolders;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import monopoly.MonopolyBoardModel;
@@ -19,30 +17,21 @@ import monopoly.Space;
  */
 public class InfoBox extends VBox {
 
-    private InfoCompanion companion;
     private int position;
+    private Space space;
+    private InfoBoxCompanion companion;
     private MonopolyBoardModel positionModel;
-    private Map<String, InfoCompanionFactory> factories = new HashMap<>();
 
     public InfoBox(Space space, String propString) {
-        factories.put("CHEST", new SpecialInfoCompanionFactory());
-        factories.put("START", new SpecialInfoCompanionFactory());
-        factories.put("CHANCE", new SpecialInfoCompanionFactory());
-        factories.put("JAIL", new SpecialInfoCompanionFactory());
-        factories.put("FREE_PARKING", new SpecialInfoCompanionFactory());
-        factories.put("GO_TO_JAIL", new SpecialInfoCompanionFactory());
-        factories.put("UTILITY", new UtilityInfoCompanionFactory());
-        factories.put("STREET", new StreetInfoCompanionFactory());
-        factories.put("TAX", new TaxInfoCompanionFactory());
-        factories.put("RAILWAY", new RailwayInfoCompanionFactory());
+
         this.position = space.getPosition();
         try {
             FXMLLoader loader = new FXMLLoader(
-                    InfoBox.class.getResource(factories.get(space.getType()).companionType() + ".fxml"));
+                    InfoBox.class.getResource("Info.fxml"));
             loader.setRoot(this);
 
-            this.companion = factories.get(space.getType()).createInfoCompanion(space, propString);
-
+//            this.companion = factories.get(space.getType()).createInfoCompanion(space, propString);
+            this.companion = new InfoBoxCompanion(space, propString);
             loader.setController(companion);
             loader.load();
         } catch (IOException exception) {
@@ -61,5 +50,4 @@ public class InfoBox extends VBox {
     public void setPosition(int position) {
         this.position = position;
     }
-
 }

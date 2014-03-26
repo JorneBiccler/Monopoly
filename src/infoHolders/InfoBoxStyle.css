@@ -10,4 +10,6 @@ and open the template in the editor.
 
 .infoBox {
     -fx-background-color: white;
+    -fx-border-color: blue;
+    -fx-border-width: 3;
 }

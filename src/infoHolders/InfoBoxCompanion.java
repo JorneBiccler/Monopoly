@@ -3,40 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package infoHolders;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import monopoly.Space;
 
 /**
  *
  * @author jorne
  */
-public class InfoCompanion {
-
+public class InfoBoxCompanion {
     private Space space;
+    public Label infoLabel;
+    public VBox imageBox;
+    public VBox infoBox;
     private String infoProp;
-
-    public InfoCompanion(Space space, String infoProp) {
+    public InfoBoxCompanion(Space space, String infoProp) {
         this.space = space;
         this.infoProp = infoProp;
     }
-
-
-
-    public String getInfoProp() {
-        return infoProp;
+    public void initialize(){
+        infoLabel.setText(infoProp);
     }
-
-    public void setInfoProp(String infoProp) {
-        this.infoProp = infoProp;
-    }
-
-    public String getType() {
-        return space.getType();
-    }
-
-    public String getId() {
-        return space.getId();
-    }
-
+    
 }
