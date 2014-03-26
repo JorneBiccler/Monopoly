@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane id="StackPane" fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monopoly.MonopolyBoardCompanion">
+    <children>
+        <ImageView fx:id="backgroundView" fitHeight="780.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true" />
+        <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="780.0">
+ <left>
+                <VBox fx:id="vBoxLeft" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+            </left>
+            <right>
+                <VBox fx:id="vBoxRight" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+            </right>
+            <top>
+                <HBox fx:id="hBoxUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="780.0" BorderPane.alignment="CENTER" />
+            </top>
+            <bottom>
+                <HBox fx:id="hBoxDown" prefHeight="120.0" prefWidth="780.0" BorderPane.alignment="CENTER" />
+            </bottom>
+        </BorderPane>
+
+    </children>
+
+</StackPane>
