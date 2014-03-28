@@ -49,7 +49,6 @@ public class MonopolyBoardModel implements Observable {
             
         } else {
             this.selectedPosition = -1;
-            System.out.println(selectedPosition);
         }
         fireInvalidationEvent();
     }

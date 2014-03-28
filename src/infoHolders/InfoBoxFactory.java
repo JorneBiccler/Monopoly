@@ -6,10 +6,12 @@
 
 package infoHolders;
 
+import monopoly.Space;
+
 /**
  *
  * @author jorne
  */
-public class RailWayInfoCompanion extends InfoBoxCompanion{
-    
+public interface InfoBoxFactory {
+    public InfoBox create(Space space, String infoProp);
 }

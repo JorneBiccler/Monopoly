@@ -19,6 +19,7 @@ public class Monopoly extends Application {
 
 
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("/monopoly/MonopolyStyleSheet.css");
         primaryStage.setScene(scene);
  
         primaryStage.setResizable(false);

@@ -17,14 +17,14 @@ public class Area {
     private String id;
     private String colorString;
     private int house;
-    private Color color;
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
 
-    public Color getColor() {
-        return color;
+    public Color getAreaColor() {
+                System.out.println(id);
+            Color color = Color.web(colorString);
+        System.out.println(color);
+            return color;
+        
     }
 
     @XmlAttribute
@@ -36,13 +36,12 @@ public class Area {
         this.id = id;
     }
     @XmlAttribute
-    public String getColorString() {
+    public String getColor() {
         return colorString;
     }
 
-    public void setColorString(String str) {
+    public void setColor(String str) {
         this.colorString = str;
-        color = Color.web(str);
     }
     @XmlAttribute
     public int getHouse() {
@@ -53,4 +52,7 @@ public class Area {
         this.house = house;
     }
 
+    public int getIndex(){
+        return Integer.parseInt(getId().replaceAll("area",""));
+    }
 }

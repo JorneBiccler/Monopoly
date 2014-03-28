@@ -7,28 +7,23 @@
 package infoHolders;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import monopoly.Space;
 
 /**
  *
  * @author jorne
  */
-public class InfoBoxCompanion {
-    private Space space;
+public class LabelBoxCompanion {
     public Label infoLabel;
-    public VBox labelBox;
-    public VBox viewBox;
     private String infoProp;
-    public InfoBoxCompanion(Space space, String infoProp) {
-        this.space = space;
+
+    public LabelBoxCompanion(String infoProp) {
         this.infoProp = infoProp;
     }
     public void initialize(){
         infoLabel.setText(infoProp);
     }
-    public void addLabel(Label label){
-        labelBox.getChildren().add(label);
+    public void changeInfoLabelText(String infoString){
+        infoLabel.setText(infoString);
     }
     
 }

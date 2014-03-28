@@ -5,10 +5,12 @@
  */
 package monopoly;
 
-import infoHolders.InfoBox;
+import infoHolders.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -24,7 +26,7 @@ import javax.xml.bind.JAXBException;
  *
  * @author jorne
  */
-public class MonopolyBoardCompanion implements InvalidationListener{
+public class MonopolyBoardCompanion implements InvalidationListener {
 
     public ImageView backgroundView;
     public HBox hBoxUp;
@@ -37,8 +39,21 @@ public class MonopolyBoardCompanion implements InvalidationListener{
     private Image backgroundImage = new Image("/resources/bord.png");
     private SpaceButton[] buttonAr = new SpaceButton[40];
     private List<InfoBox> infoList;
+    private Map<String, InfoBoxFactory> infoFactoryMap;
 
     public MonopolyBoardCompanion() throws JAXBException {
+        infoFactoryMap = new HashMap<>();
+        infoFactoryMap.put("CHEST", new SpecialBoxFactory());
+        infoFactoryMap.put("START", new SpecialBoxFactory());
+        infoFactoryMap.put("CHANCE", new SpecialBoxFactory());
+        infoFactoryMap.put("JAIL", new SpecialBoxFactory());
+        infoFactoryMap.put("FREE_PARKING", new SpecialBoxFactory());
+        infoFactoryMap.put("GO_TO_JAIL", new SpecialBoxFactory());
+        infoFactoryMap.put("UTILITY", new UtilityBoxFactory());
+        infoFactoryMap.put("STREET", new StreetBoxFactory());
+        infoFactoryMap.put("TAX", new TaxBoxFactory());
+        infoFactoryMap.put("RAILWAY", new RailwayBoxFactory());
+
         JAXBContext jc = JAXBContext.newInstance(Board.class);
         board = (Board) jc.createUnmarshaller().unmarshal(Board.class.getResource("/resources/monopoly.xml"));
 
@@ -61,8 +76,15 @@ public class MonopolyBoardCompanion implements InvalidationListener{
         placeButtons(buttonAr);
 
         for (Space space : board.getSpaces()) {
-            infoList.add(new InfoBox(space,  properties.getProperty(space.getId())));
+            InfoBox tempBox = infoFactoryMap.get(space.getType()).create(space, properties.getProperty(space.getId()));
+            infoList.add(tempBox);
+            if (space.getType().equals("STREET")) {
+                StreetBox tempBox2 = (StreetBox) tempBox;
+                tempBox2.setArea(board.getAreas().get(
+                                  Integer.parseInt(space.getArea().replaceAll("area",""))-1));
+            }
         }
+
     }
 
 
@@ -88,12 +110,12 @@ public class MonopolyBoardCompanion implements InvalidationListener{
 
     @Override
     public void invalidated(Observable o) {
-        for(InfoBox info: infoList){
-            if(model.getSelectedPosition()== info.getPosition()){
+        for (InfoBox info : infoList) {
+            if (model.getSelectedPosition() == info.getPosition()) {
                 borderPane.setCenter(info);
             }
         }
-        if(model.getSelectedPosition() == -1){
+        if (model.getSelectedPosition() == -1) {
             borderPane.setCenter(null);
         }
     }

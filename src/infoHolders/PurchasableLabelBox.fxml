@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="VBox" prefHeight="128.0" prefWidth="133.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="infoLabel" text="Label" />
+        <Label fx:id="costLabel" text="Label" />
+        <Label fx:id="ownerTextLabel" text="Label" />
+        <Label fx:id="ownerLabel" text="Label" />
+    </children>
+</fx:root>
