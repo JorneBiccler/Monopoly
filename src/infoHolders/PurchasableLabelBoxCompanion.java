@@ -1,53 +1,48 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoHolders;
 
 import javafx.scene.control.Label;
 import monopoly.Player;
 
-/**
- *
- * @author jorne
+/*
+ * Companion klasse die labels voor de kost en de eigenaar bevat.
+ * @author Jorne Biccler
  */
-public class PurchasableLabelBoxCompanion extends LabelBoxCompanion{
+public class PurchasableLabelBoxCompanion implements LabelBoxCompanion {
+
     private int cost;
     public Label costLabel;
     private Player owner;
     public Label ownerLabel;
-    public Label ownerTextLabel;
-    public PurchasableLabelBoxCompanion(String infoProp, int cost) {
-        super(infoProp);
+
+    public PurchasableLabelBoxCompanion(int cost) {
         this.cost = cost;
     }
-    
-    public void initialize(){
-        super.initialize();
-        costLabel.setText("kostprijs:  €"+cost);
-        ownerTextLabel.setText("huidige eigenaar:");
-        ownerLabel.setText("niamand");
-        ownerLabel.getStyleClass().add("center");
+
+    public void initialize() {
+        costLabel.setText("Kostprijs:  €" + cost);
+        ownerLabel.setText("Huidige eigenaar: niemand");
+
     }
-    public void renewCost(int cost){
+
+    // methode die een nieuwe kost instelt en ook het bijhorende label aanpast 
+    public void renewCost(int cost) {
         this.cost = cost;
-        costLabel.setText("kostprijs:  €"+cost);
+        costLabel.setText("Kostprijs:  €" + cost);
     }
-    
+
     public Player getOwner() {
         return owner;
     }
 
-    public void renewtOwner(Player owner) {
+    // methode die een nieuwe eigenaar instelt en ook het bijhorende label aanpast     
+    public void renewOwner(Player owner) {
         this.owner = owner;
-        ownerLabel.setText(owner.getName());
+        ownerLabel.setText("Huidige eigenaar: " + owner.getName());
     }
-    
-    
+
 }

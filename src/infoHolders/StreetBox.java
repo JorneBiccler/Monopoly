@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package infoHolders;
 
@@ -10,9 +10,9 @@ import javafx.scene.paint.Color;
 import monopoly.Area;
 import monopoly.Space;
 
-/**
- *
- * @author jorne
+/*
+ * VBox die alle info rond 'street' types weergeeft
+ * @author Jorne Biccler
  */
 public class StreetBox extends InfoBox {
 
@@ -22,25 +22,29 @@ public class StreetBox extends InfoBox {
     private int[] rentAr;
     private int currentRentIndex;
     private Area area;
+
     public StreetBox(Space space, String propString) {
         super(space, propString);
         this.rentAr = space.getRentArray();
         rectBox = new RectangleBox(Color.AQUA);
         replaceImageBox(rectBox);
-        labelBoxCompanion = new RentableLabelBoxCompanion(propString, space.getCost(),rentAr[0]);
+        labelBoxCompanion = new RentableLabelBoxCompanion(space.getCost(), rentAr[0]);
         String fxmlURL = "/infoHolders/RentableLabelBox.fxml";
         labelBox = new LabelBox(labelBoxCompanion, fxmlURL);
-        replaceLabelBox(labelBox);
+        addNodeLabelBox(labelBox);
     }
 
     public int getCurrentRentIndex() {
         return currentRentIndex;
     }
 
+    //methode de 'rentIndex' verandert en het label aanpast
     public void setCurrentRentIndex(int currentRentIndex) {
         this.currentRentIndex = currentRentIndex;
+        labelBoxCompanion.changeRentLabel(currentRentIndex);
     }
-    public int getCurrentRent(){
+
+    public int getCurrentRent() {
         return rentAr[currentRentIndex];
     }
 
@@ -48,12 +52,10 @@ public class StreetBox extends InfoBox {
         return area;
     }
 
+    //methode die de area 'set' en ook de kleur van de Rectangle aanpast
     public void setArea(Area area) {
         this.area = area;
-        changeRectColor(area.getAreaColor());
+        rectBox.changeRectangleColor(area.getAreaColor());
     }
-    public void changeRectColor(Color color){
-        rectBox.changeRectangleColor(color);
-        System.out.println(color);
-    }
+
 }

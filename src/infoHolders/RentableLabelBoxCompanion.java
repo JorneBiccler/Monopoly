@@ -1,30 +1,35 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoHolders;
 
 import javafx.scene.control.Label;
 
-/**
- *
- * @author jorne
+/*
+ * companion klasse van RentableLabelBox
+ * @author Jorne Biccler
  */
-public class RentableLabelBoxCompanion extends PurchasableLabelBoxCompanion{
+public class RentableLabelBoxCompanion extends PurchasableLabelBoxCompanion {
+
     public Label rentLabel;
     private int currentRent;
-    public RentableLabelBoxCompanion(String infoProp, int cost, int currentRent) {
-        super(infoProp, cost);
+
+    public RentableLabelBoxCompanion(int cost, int currentRent) {
+        super(cost);
         this.currentRent = currentRent;
     }
-    public void initialize(){
+
+    public void initialize() {
         super.initialize();
-        rentLabel.setText("huur:  €" + currentRent);
+        rentLabel.setText("Huur:  €" + currentRent);
     }
-    public void changeRentLabel(int currentRent){
-        rentLabel.setText("huur:  €" + currentRent);
+
+    //methode die de huur verandert en ook het bijhorende label aanpast
+    public void changeRentLabel(int currentRent) {
+        this.currentRent = currentRent;
+        rentLabel.setText("Huur:  €" + currentRent);
     }
-    
+
 }

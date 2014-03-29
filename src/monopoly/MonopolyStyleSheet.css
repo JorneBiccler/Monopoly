@@ -7,32 +7,37 @@ and open the template in the editor.
     Created on : Mar 26, 2014, 4:20:27 PM
     Author     : jorne
 */
-.button{
-    -fx-background-color: transparent;
-}
-
 .infoBox {
     -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-width: 5;
     -fx-spacing: 5;
-}
 
-.center{
-    -fx-alignment: CENTER;
 }
-
 .labelBox {
-    -fx-alignment: CENTER;
+    -fx-alignment:TOP_CENTER;
+    -fx-spacing: 5;
+    -fx-padding: 5;
+
 }
+.extraLabelBox{
+      -fx-alignment:TOP_LEFT;
+    -fx-spacing: 5;
 
-.imageBox {
-    -fx-alignment: CENTER;
+    
 }
-
-
 .label {
     -fx-wrap-text: true;
     -fx-alignment: CENTER;
 }
+
+.button-selected {
+    -fx-background-color: transparent;
+    -fx-border-color: blue;-fx-border-width: 3;
+}
+.button-unselected {
+    -fx-background-color: transparent;
+    -fx-border-color: blue;-fx-border-width: 0;
+}
+
 

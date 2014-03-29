@@ -1,19 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
 import infoHolders.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -22,9 +19,9 @@ import javafx.scene.layout.VBox;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-/**
- *
- * @author jorne
+/*
+ * Companion klasse die bij een MonopolyBoard hoort
+ * @author Jorne Biccler
  */
 public class MonopolyBoardCompanion implements InvalidationListener {
 
@@ -34,7 +31,7 @@ public class MonopolyBoardCompanion implements InvalidationListener {
     public HBox hBoxDown;
     public VBox vBoxRight;
     public BorderPane borderPane;
-    private MonopolyBoardModel model;
+    private SimpleIntegerProperty model;
     private Board board;
     private Image backgroundImage = new Image("/resources/bord.png");
     private SpaceButton[] buttonAr = new SpaceButton[40];
@@ -57,14 +54,8 @@ public class MonopolyBoardCompanion implements InvalidationListener {
         JAXBContext jc = JAXBContext.newInstance(Board.class);
         board = (Board) jc.createUnmarshaller().unmarshal(Board.class.getResource("/resources/monopoly.xml"));
 
-        model = new MonopolyBoardModel(-1);
+        model = new SimpleIntegerProperty(-1);
         model.addListener(this);
-        for (int i = 0; i < buttonAr.length; i++) {
-            buttonAr[i] = new SpaceButton(i);
-            buttonAr[i].setModel(model);
-            buttonAr[i].setPrefWidth(120);
-            buttonAr[i].setPrefHeight(120);
-        }
     }
 
     public void initialize() throws IOException {
@@ -73,49 +64,54 @@ public class MonopolyBoardCompanion implements InvalidationListener {
 
         backgroundView.setImage(backgroundImage);
         infoList = new ArrayList<>();
-        placeButtons(buttonAr);
-
+        placeButtons();
         for (Space space : board.getSpaces()) {
             InfoBox tempBox = infoFactoryMap.get(space.getType()).create(space, properties.getProperty(space.getId()));
             infoList.add(tempBox);
             if (space.getType().equals("STREET")) {
                 StreetBox tempBox2 = (StreetBox) tempBox;
-                tempBox2.setArea(board.getAreas().get(
-                                  Integer.parseInt(space.getArea().replaceAll("area",""))-1));
+                for (Area area : board.getAreas()) {
+                    if (area.getId().equals(space.getArea())) {
+                        tempBox2.setArea(area);
+                    }
+                }
             }
         }
-
     }
 
-
-    /* Sinds ik ervanuit ga dat een monopoly spel altijd evenveel vakjes wordt gebruik ik de volgende aanpak
-     om de buttons in de juiste volgorde te plaatsen*/
-    private void placeButtons(SpaceButton[] ar) {
-        hBoxDown.getChildren().add(ar[0]);
-        hBoxUp.getChildren().add(ar[10]);
+    //methode die alle knopen creëert en op de juiste plaats zet
+    private void placeButtons() {
+        for (int i = 0; i < buttonAr.length; i++) {
+            buttonAr[i] = new SpaceButton(i, model, 120, 120);
+        }
+        hBoxDown.getChildren().add(buttonAr[0]);
+        hBoxUp.getChildren().add(buttonAr[10]);
         for (int i = 1; i < 10; i++) {
-            vBoxLeft.getChildren().add(ar[10 - i]);
-            vBoxRight.getChildren().add(ar[20 + i]);
+            vBoxLeft.getChildren().add(buttonAr[10 - i]);
+            vBoxRight.getChildren().add(buttonAr[20 + i]);
 
         }
         for (int i = 1; i <= 10; i++) {
-            ar[10 + i].setPrefWidth(60);
-            ar[40 - i].setPrefWidth(60);
-            hBoxUp.getChildren().add(ar[10 + i]);
-            hBoxDown.getChildren().add(ar[40 - i]);
+            buttonAr[10 + i].setPrefWidth(60);
+            buttonAr[40 - i].setPrefWidth(60);
+            hBoxUp.getChildren().add(buttonAr[10 + i]);
+            hBoxDown.getChildren().add(buttonAr[40 - i]);
         }
-        ar[20].setPrefWidth(120);
-        ar[30].setPrefWidth(120);
+        buttonAr[20].setPrefWidth(120);
+        buttonAr[30].setPrefWidth(120);
     }
 
+    /* een MonopolyBoardCompanion luistert naar een MonopolyModel
+     * en verandert het kind in het centrum zoals gewenst
+     */
     @Override
     public void invalidated(Observable o) {
         for (InfoBox info : infoList) {
-            if (model.getSelectedPosition() == info.getPosition()) {
+            if (model.getValue()== info.getPosition()) {
                 borderPane.setCenter(info);
             }
         }
-        if (model.getSelectedPosition() == -1) {
+        if (model.getValue()== -1) {
             borderPane.setCenter(null);
         }
     }

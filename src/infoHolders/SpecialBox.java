@@ -1,24 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoHolders;
 
-import javafx.scene.layout.VBox;
 import monopoly.Space;
 
-/**
- *
- * @author jorne
+/*
+ * InfoBox horende bij 'speciale' types, bvb. START,JAIL,..
+ * i.h.b. types waarbij er enkel een infolabel en image nodig is.
+ * @author Jorne Biccler
  */
-public class SpecialBox extends InfoBox{
+public class SpecialBox extends InfoBox {
 
     public SpecialBox(Space space, String propString) {
         super(space, propString);
         String imageURL = "/resources/" + space.getType().toLowerCase() + ".png";
         replaceImageBox(new ImageBox(imageURL));
     }
-    
+
 }

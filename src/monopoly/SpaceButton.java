@@ -10,27 +10,32 @@ import javafx.beans.Observable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 
 /**
  *
  * @author jorne
  */
-public class SpaceButton extends Button implements InvalidationListener, EventHandler<ActionEvent> {
+public class SpaceButton extends ToggleButton implements InvalidationListener, EventHandler<ActionEvent> {
 
-    private MonopolyBoardModel model;
+    private SimpleIntegerProperty model;
     private int position;
-    public SpaceButton(int position) {
+
+    public SpaceButton(int position, SimpleIntegerProperty model, double height, double width) {
         setOnAction(this);
         this.position = position;
-        this.setStyle("-fx-background-color: transparent;");   
+        this.getStyleClass().add("button-unselected");
+        this.model = model;
+        model.addListener(this);
+        this.setPrefHeight(height);
+        this.setPrefWidth(width);       
     }
 
-    public MonopolyBoardModel getModel() {
+    public SimpleIntegerProperty getModel() {
         return model;
     }
 
-    public void setModel(MonopolyBoardModel model) {
+    public void setModel(SimpleIntegerProperty model) {
         if (model != this.model) {
             if (model != null) {
                 model.removeListener(this);
@@ -44,15 +49,23 @@ public class SpaceButton extends Button implements InvalidationListener, EventHa
 
     @Override
     public void invalidated(Observable o) {
-        if (position == model.getSelectedPosition()) {
-            this.setStyle("-fx-background-color: transparent;-fx-border-color: blue;-fx-border-width: 3;");
+        if (position == model.getValue()) {
+            this.getStyleClass().clear();
+            this.getStyleClass().add("button-selected");
         } else {
-            this.setStyle("-fx-background-color: transparent;-fx-border-color: blue;-fx-border-width: 0;");
+            this.getStyleClass().clear();
+            this.setSelected(false);
+            this.getStyleClass().add("button-unselected");
         }
     }
 
     @Override
     public void handle(ActionEvent t) {
-        model.setSelectedPosition(position);
+        if(this.isSelected() == true){
+            model.set(position);
+        }
+        if(this.isSelected() == false){
+            model.set(-1);
+        }
     }
 }

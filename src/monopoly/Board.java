@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
@@ -10,9 +10,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author jorne
+/*
+ * Klasse waarvan een object alle 'spelelementen' bijhoudt
+ * in het bijzonder zo geschreven dat ook JAXB er gebruik van kan maken
+ * @author Jorne Biccler
  */
 @XmlRootElement
 public class Board {
@@ -22,31 +23,32 @@ public class Board {
     private List<Space> spaces;
 
     @XmlElement(name = "settings")
-    public Setting getSettings(){
+    public Setting getSettings() {
         return settings;
     }
-    public void setSettings(Setting settings){
+
+    public void setSettings(Setting settings) {
         this.settings = settings;
     }
-    
-    
-    @XmlElementWrapper(name="areas")
-    @XmlElement(name="area")
-    public List<Area> getAreas(){
+
+    @XmlElementWrapper(name = "areas")
+    @XmlElement(name = "area")
+    public List<Area> getAreas() {
         return areas;
     }
-    public void setAreas(List<Area> areas){
+
+    public void setAreas(List<Area> areas) {
         this.areas = areas;
     }
-    
-    
-    @XmlElementWrapper(name="spaces")
-    @XmlElement(name="space")
-    public List<Space> getSpaces(){
+
+    @XmlElementWrapper(name = "spaces")
+    @XmlElement(name = "space")
+    public List<Space> getSpaces() {
         return spaces;
     }
-    public void setSpaces(List<Space> spaces){
+
+    public void setSpaces(List<Space> spaces) {
         this.spaces = spaces;
     }
-    
+
 }

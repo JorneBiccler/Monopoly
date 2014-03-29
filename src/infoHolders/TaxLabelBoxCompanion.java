@@ -1,32 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoHolders;
 
 import javafx.scene.control.Label;
 
-/**
- *
- * @author jorne
+/*
+ * companion klasse van TaxLabelBox
+ * @author Jorne Biccler
  */
-public class TaxLabelBoxCompanion extends LabelBoxCompanion{
+public class TaxLabelBoxCompanion implements LabelBoxCompanion {
+
     public Label amountLabel;
     private int amount;
 
-    public TaxLabelBoxCompanion(int amount, String infoProp) {
-        super(infoProp);
+    public TaxLabelBoxCompanion(int amount) {
         this.amount = amount;
     }
+
     @Override
-    public void initialize(){
-        super.initialize();
-        amountLabel.setText("\u20ac" + amount);
+    public void initialize() {
+        amountLabel.setText("Betaal: \u20ac" + amount);
     }
-    public void setAmountLabel(int amount){
-         amountLabel.setText("\u20ac" + amount);
-    }
-    
+
 }

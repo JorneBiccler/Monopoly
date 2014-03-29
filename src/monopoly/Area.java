@@ -1,15 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
 import javafx.scene.paint.Color;
 import javax.xml.bind.annotation.XmlAttribute;
 
-/**
- *
+/*
+ * Klasse die alle info rond 'areas' bijhoudt,
+ * in het bijzonder is ze zo opgesteld dat ook JAXB er gebruik van kan maken
  * @author jorne
  */
 public class Area {
@@ -18,13 +19,9 @@ public class Area {
     private String colorString;
     private int house;
 
-
     public Color getAreaColor() {
-                System.out.println(id);
-            Color color = Color.web(colorString);
-        System.out.println(color);
-            return color;
-        
+        Color color = Color.web(colorString);
+        return color;
     }
 
     @XmlAttribute
@@ -35,6 +32,7 @@ public class Area {
     public void setId(String id) {
         this.id = id;
     }
+
     @XmlAttribute
     public String getColor() {
         return colorString;
@@ -43,6 +41,7 @@ public class Area {
     public void setColor(String str) {
         this.colorString = str;
     }
+
     @XmlAttribute
     public int getHouse() {
         return house;
@@ -52,7 +51,4 @@ public class Area {
         this.house = house;
     }
 
-    public int getIndex(){
-        return Integer.parseInt(getId().replaceAll("area",""));
-    }
 }

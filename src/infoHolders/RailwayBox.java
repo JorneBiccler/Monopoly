@@ -1,18 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package infoHolders;
 
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import monopoly.Space;
 
-/**
- *
- * @author jorne
+/*
+ * InfoBox met extra informatie rond het specifieke RailWay type.
+ * @author Jorne Biccler
  */
 public class RailwayBox extends InfoBox {
 
@@ -23,9 +21,9 @@ public class RailwayBox extends InfoBox {
         super(space, propString);
         String imageURL = "/resources/railway.png";
         replaceImageBox(new ImageBox(imageURL));
-        labelBoxCompanion = new RentableLabelBoxCompanion(propString, space.getCost(), space.getRent0());
+        labelBoxCompanion = new RentableLabelBoxCompanion(space.getCost(), space.getRent0());
         String fxmlPath = "/infoHolders/RentableLabelBox.fxml";
         labelBox = new LabelBox(labelBoxCompanion, fxmlPath);
-        replaceLabelBox(labelBox);
+        addNodeLabelBox(labelBox);
     }
 }

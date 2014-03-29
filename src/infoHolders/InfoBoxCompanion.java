@@ -1,34 +1,40 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoHolders;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import monopoly.Space;
 
-/**
- *
- * @author jorne
+/*
+ * Companion klasse horende bij een InfoBox
+ * @author Jorne Biccler
  */
 public class InfoBoxCompanion {
+
     private Space space;
     public Label infoLabel;
     public VBox labelBox;
     public VBox viewBox;
     private String infoProp;
+
     public InfoBoxCompanion(Space space, String infoProp) {
         this.space = space;
         this.infoProp = infoProp;
     }
-    public void initialize(){
+
+    public void initialize() {
         infoLabel.setText(infoProp);
     }
-    public void addLabel(Label label){
-        labelBox.getChildren().add(label);
+
+    public VBox getLabelBox() {
+        return labelBox;
     }
-    
+
+    public VBox getViewBox() {
+        return viewBox;
+    }
 }

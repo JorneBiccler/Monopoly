@@ -1,0 +1,9 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Auteur: Jorne Biccler
+${licensePrefix}Project: ugentopoly
+${licensePrefix}Vak: Programmeren 2
+<#if licenseLast??>
+${licenseLast}
+</#if>

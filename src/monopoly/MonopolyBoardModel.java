@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
@@ -10,9 +10,10 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
-/**
- *
- * @author jorne
+/*
+ * uitbreiding van Observable die als model dient om aan te geven welke positie 
+ * geselecteerd is. (zal waarschijnlijk later meer functionaliteit krijgen)
+ * @author Jorne Biccler
  */
 public class MonopolyBoardModel implements Observable {
 
@@ -43,13 +44,14 @@ public class MonopolyBoardModel implements Observable {
         return selectedPosition;
     }
 
+    /* verandert selectedPosition zodat er een niet observeerbare positie
+    *  komt als de reeds ingevulde positie hetzelfde als de nieuwe is.
+    */
     public void setSelectedPosition(int selectedPosition) {
         if (this.selectedPosition != selectedPosition) {
             this.selectedPosition = selectedPosition;
-            
-        } else {
-            this.selectedPosition = -1;
+            fireInvalidationEvent();
         }
-        fireInvalidationEvent();
+        
     }
 }

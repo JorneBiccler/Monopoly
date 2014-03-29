@@ -1,19 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoHolders;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- *
- * @author jorne
+/*
+ * Companion klasse voor een RectangleBox
+ * @author Jorne Biccler
  */
 public class RectangleBoxCompanion {
+
     public Rectangle rectangle;
     public Color color;
 
@@ -21,10 +21,12 @@ public class RectangleBoxCompanion {
         this.color = color;
     }
 
-    public void initialize(){
+    public void initialize() {
         rectangle.setFill(color);
     }
-    public void changeRectangleColor(Color color){
+
+    //methode die het kleur van de een rectangle verandert
+    public void changeRectangleColor(Color color) {
         rectangle.setFill(color);
     }
 }
