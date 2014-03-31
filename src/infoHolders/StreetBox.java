@@ -27,11 +27,11 @@ public class StreetBox extends InfoBox {
         super(space, propString);
         this.rentAr = space.getRentArray();
         rectBox = new RectangleBox(Color.AQUA);
-        replaceImageBox(rectBox);
+        replaceViewBox(rectBox);
         labelBoxCompanion = new RentableLabelBoxCompanion(space.getCost(), rentAr[0]);
         String fxmlURL = "/infoHolders/RentableLabelBox.fxml";
         labelBox = new LabelBox(labelBoxCompanion, fxmlURL);
-        addNodeLabelBox(labelBox);
+        addNodeBottomBox(labelBox);
     }
 
     public int getCurrentRentIndex() {

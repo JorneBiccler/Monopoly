@@ -31,7 +31,7 @@ public class LabelBox extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.getStyleClass().add("extraLabelBox");
+        this.getStyleClass().add("labelBox");
     }
 
     public LabelBoxCompanion getCompanion() {

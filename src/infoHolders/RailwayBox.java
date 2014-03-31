@@ -20,10 +20,10 @@ public class RailwayBox extends InfoBox {
     public RailwayBox(Space space, String propString) {
         super(space, propString);
         String imageURL = "/resources/railway.png";
-        replaceImageBox(new ImageBox(imageURL));
+        replaceViewBox(new ImageBox(imageURL));
         labelBoxCompanion = new RentableLabelBoxCompanion(space.getCost(), space.getRent0());
         String fxmlPath = "/infoHolders/RentableLabelBox.fxml";
         labelBox = new LabelBox(labelBoxCompanion, fxmlPath);
-        addNodeLabelBox(labelBox);
+        addNodeBottomBox(labelBox);
     }
 }

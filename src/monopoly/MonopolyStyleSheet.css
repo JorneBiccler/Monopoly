@@ -14,13 +14,13 @@ and open the template in the editor.
     -fx-spacing: 5;
 
 }
-.labelBox {
+.bottomBox {
     -fx-alignment:TOP_CENTER;
     -fx-spacing: 5;
     -fx-padding: 5;
 
 }
-.extraLabelBox{
+.labelBox{
       -fx-alignment:TOP_LEFT;
     -fx-spacing: 5;
 

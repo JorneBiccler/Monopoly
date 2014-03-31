@@ -17,7 +17,7 @@ public class SpecialBox extends InfoBox {
     public SpecialBox(Space space, String propString) {
         super(space, propString);
         String imageURL = "/resources/" + space.getType().toLowerCase() + ".png";
-        replaceImageBox(new ImageBox(imageURL));
+        replaceViewBox(new ImageBox(imageURL));
     }
 
 }

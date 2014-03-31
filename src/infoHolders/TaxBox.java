@@ -22,11 +22,11 @@ public class TaxBox extends InfoBox {
         super(space, propString);
         taxAmount = space.getAmount();
         String imageURL = "/resources/" + space.getType().toLowerCase() + ".png";
-        replaceImageBox(new ImageBox(imageURL));
+        replaceViewBox(new ImageBox(imageURL));
         String fxmlPath = "/infoHolders/TaxLabelBox.fxml";
         labelBoxCompanion = new TaxLabelBoxCompanion(taxAmount);
         labelBox = new LabelBox(labelBoxCompanion, fxmlPath);
-        addNodeLabelBox(labelBox);
+        addNodeBottomBox(labelBox);
 
     }
 

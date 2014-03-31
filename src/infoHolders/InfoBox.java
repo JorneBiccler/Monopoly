@@ -37,7 +37,7 @@ public class InfoBox extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        companion.getLabelBox().getStyleClass().add("labelBox");
+        companion.getBottomBox().getStyleClass().add("bottomBox");
 
     }
 
@@ -46,13 +46,13 @@ public class InfoBox extends VBox {
     }
 
     // methode die de ImageBox vervangt
-    public void replaceImageBox(VBox imageBox) {
+    public void replaceViewBox(VBox imageBox) {
         getChildren().set(0, imageBox);
     }
 
     // methode die extra kinderen toevoegd aan de LabelBox
-    public void addNodeLabelBox(Node node) {
-        companion.getLabelBox().getChildren().add(node);
+    public void addNodeBottomBox(Node node) {
+        companion.getBottomBox().getChildren().add(node);
     }
 
 }

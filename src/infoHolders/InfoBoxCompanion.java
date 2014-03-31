@@ -17,7 +17,7 @@ public class InfoBoxCompanion {
 
     private Space space;
     public Label infoLabel;
-    public VBox labelBox;
+    public VBox bottomBox;
     public VBox viewBox;
     private String infoProp;
 
@@ -30,8 +30,8 @@ public class InfoBoxCompanion {
         infoLabel.setText(infoProp);
     }
 
-    public VBox getLabelBox() {
-        return labelBox;
+    public VBox getBottomBox() {
+        return bottomBox;
     }
 
     public VBox getViewBox() {

@@ -24,11 +24,11 @@ public class UtilityBox extends InfoBox {
         super(space, propString);
         cost = space.getCost();
         String imageURL = "/resources/" + space.getId().replaceAll("space.", "") + ".png";
-        replaceImageBox(new ImageBox(imageURL));
+        replaceViewBox(new ImageBox(imageURL));
         labelBoxCompanion = new PurchasableLabelBoxCompanion(cost);
         String fxmlURL = "/infoHolders/PurchasableLabelBox.fxml";
         labelBox = new LabelBox(labelBoxCompanion, fxmlURL);
-        addNodeLabelBox(labelBox);
+        addNodeBottomBox(labelBox);
     }
 
     public int getCost() {
