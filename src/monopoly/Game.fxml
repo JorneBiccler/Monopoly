@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="gameBox" prefHeight="780.0" prefWidth="1050" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <StackPane fx:id="boardStackPane" prefHeight="780.0" prefWidth="780.0">
+            <children>
+                <ImageView fx:id="backgroundView" fitHeight="780.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </StackPane>
+        <VBox fx:id="rightVBox" alignment="TOP_CENTER" prefHeight="780.0" prefWidth="524.0" spacing="10.0" visible="false">
+            <children>
+                <TabPane fx:id="playerTabPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="300.0" prefWidth="286.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="300.0" />
+                <ListView fx:id="logListView" prefHeight="200.0" prefWidth="200.0" />
+                <Label fx:id="currentPlayer" text="Huidige speler:" />
+            </children>
+        </VBox>
+    </children>
+</fx:root>

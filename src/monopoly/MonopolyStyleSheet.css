@@ -1,43 +1,60 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Mar 26, 2014, 4:20:27 PM
-    Author     : jorne
-*/
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
+ */
+
 .infoBox {
     -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-width: 5;
     -fx-spacing: 5;
-
 }
+
 .bottomBox {
     -fx-alignment:TOP_CENTER;
     -fx-spacing: 5;
     -fx-padding: 5;
-
 }
+
 .labelBox{
-      -fx-alignment:TOP_LEFT;
+    -fx-alignment:TOP_LEFT;
     -fx-spacing: 5;
-
-    
 }
+
 .label {
     -fx-wrap-text: true;
     -fx-alignment: CENTER;
 }
 
-.button-selected {
+.spaceBox-selected {
     -fx-background-color: transparent;
-    -fx-border-color: blue;-fx-border-width: 3;
+    -fx-border-color: PEACHPUFF;
+    -fx-border-width: 3;
 }
-.button-unselected {
+.spaceBox-unselected {
     -fx-background-color: transparent;
-    -fx-border-color: blue;-fx-border-width: 0;
+    -fx-border-width: 0;
+}
+
+.spaceBox-HorLeft{
+    -fx-alignment: CENTER_LEFT;
+}
+
+.spaceBox-HorRight{
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.spaceBox-VertUp{
+    -fx-alignment: TOP_CENTER;
+}
+
+.spaceBox-VertUp{
+    -fx-alignment: BOTTOM_CENTER;
+}
+
+.spaceBox-Corner{
+    -fx-alignment: BOTTOM_LEFT;
 }
 
 

@@ -55,4 +55,25 @@
         <space type="TAX" position="38" id="space.tax2" amount="75"/>
         <space type="STREET" position="39" area="area8" id="space.street22" cost="400" rent0="50" rent1="200" rent2="600" rent3="1400" rent4="1700" rent5="2000"/>
     </spaces>
+
+    <deck type="CHANCE">
+        <card type="JAIL" id="card.chance.01" />
+        <card type="MOVE" collect="false" position="10" id="card.chance.02" />
+        <card type="MOVE" collect="true" position="19" id="card.chance.03" />
+        <card type="MOVE" collect="true" position="31" id="card.chance.04" />
+        <card type="MOVEREL" relative="-3" id="card.chance.05" />
+        <card type="MONEY" amount="20" id="card.chance.06" />
+        <card type="MONEY" amount="-50" id="card.chance.07" />
+        <card type="PLAYERS_MONEY" amount="5" id="card.chance.08" />
+    </deck>
+
+    <deck type="CHEST">
+        <card type="JAIL" id="card.chest.01" />
+        <card type="MOVE" collect="true" position="26" id="card.chest.02" />
+        <card type="MONEY" amount="-50" id="card.chest.03" />
+        <card type="MONEY" amount="100" id="card.chest.04" />
+        <card type="MOVE" collect="true" position="39" id="card.chest.05" />
+        <card type="MONEY" amount="-10" id="card.chest.06" />
+        <card type="MOVEREL" relative="-3" id="card.chest.07" />
+    </deck>
 </board>

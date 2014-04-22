@@ -8,16 +8,16 @@ package monopoly;
 import javafx.scene.paint.Color;
 import javax.xml.bind.annotation.XmlAttribute;
 
-/*
- * Klasse die alle info rond 'areas' bijhoudt,
- * in het bijzonder is ze zo opgesteld dat ook JAXB er gebruik van kan maken
- * @author jorne
+/**
+ * Klasse waarvan een object alle info rond 'areas' bijhoudt, in het bijzonder
+ * is ze zo opgesteld dat ook JAXB er gebruik van kan maken
+ *
+ * @author Jorne Biccler
  */
 public class Area {
 
     private String id;
     private String colorString;
-    private int house;
 
     public Color getAreaColor() {
         Color color = Color.web(colorString);
@@ -40,15 +40,6 @@ public class Area {
 
     public void setColor(String str) {
         this.colorString = str;
-    }
-
-    @XmlAttribute
-    public int getHouse() {
-        return house;
-    }
-
-    public void setHouse(int house) {
-        this.house = house;
     }
 
 }

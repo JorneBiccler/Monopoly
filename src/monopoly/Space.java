@@ -1,30 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * Klasse waarvan de objecten een plaats van het monopoly spel bijhouden i.h.b.
+ * zo geschreven dat deze van JAXB gebruik kan maken
  *
  * @author jorne
  */
 public class Space {
 
-    private String type;
+    private SpaceType type;
     private String area;
     private int position;
     private String id;
     private int cost;
     private int rent0;
-    private int rent1;
-    private int rent2;
-    private int rent3;
-    private int rent4;
-    private int rent5;
     private int amount;
+ 
 
 
     @XmlAttribute
@@ -46,11 +44,11 @@ public class Space {
     }
 
     @XmlAttribute
-    public String getType() {
+    public SpaceType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(SpaceType type) {
         this.type = type;
     }
 
@@ -90,54 +88,4 @@ public class Space {
         this.rent0 = rent0;
     }
 
-    @XmlAttribute
-    public int getRent1() {
-        return rent1;
-    }
-
-    public void setRent1(int rent1) {
-        this.rent1 = rent1;
-    }
-
-    @XmlAttribute
-    public int getRent2() {
-        return rent2;
-    }
-
-    public void setRent2(int rent2) {
-        this.rent2 = rent2;
-    }
-
-    @XmlAttribute
-    public int getRent3() {
-        return rent3;
-    }
-
-    public void setRent3(int rent3) {
-        this.rent3 = rent3;
-    }
-
-    @XmlAttribute
-    public int getRent4() {
-        return rent4;
-    }
-
-    public void setRent4(int rent4) {
-        this.rent4 = rent4;
-    }
-
-    @XmlAttribute
-    public int getRent5() {
-        return rent5;
-    }
-
-    public void setRent5(int rent5) {
-        this.rent5 = rent5;
-    }
-
-    public int[] getRentArray() {
-        int[] ar = {rent0, rent1, rent2, rent3, rent4, rent5};
-        return ar;
-    }
-    
 }

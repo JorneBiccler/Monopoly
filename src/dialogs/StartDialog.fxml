@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root id="AnchorPane" prefHeight="268.0" prefWidth="319.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TableView  fx:id="tableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <columns>
+                <TableColumn fx:id="tokenColumn" prefWidth="70.0" text="pion" />
+                <TableColumn fx:id="nameColumn" prefWidth="228.0" text="naam" />
+            </columns>
+        </TableView>
+        <Button fx:id="startButton" layoutX="50.0" layoutY="229.0" mnemonicParsing="false" text="Start" AnchorPane.leftAnchor="50.0" />
+        <Button fx:id="addPlayerButton" layoutX="160.0" layoutY="229.0" mnemonicParsing="false" text="speler toevoegen" AnchorPane.rightAnchor="50.0" />
+    </children>
+</fx:root>

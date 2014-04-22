@@ -1,14 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
+ * Klasse waarvan de objecten de settings van het monopoly spel bijhouden i.h.b.
+ * zo geschreven dat deze van JAXB gebruik kan maken
  *
  * @author jorne
  */
