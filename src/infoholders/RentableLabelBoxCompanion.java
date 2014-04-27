@@ -16,7 +16,7 @@ public class RentableLabelBoxCompanion extends PurchasableLabelBoxCompanion {
 
     public Label rentLabel;
     private final int rent;
-
+    private String initialRentString;
     public RentableLabelBoxCompanion(int cost, int rent) {
         super(cost);
         this.rent = rent;
@@ -25,7 +25,12 @@ public class RentableLabelBoxCompanion extends PurchasableLabelBoxCompanion {
     @Override
     public void initialize() {
         super.initialize();
-        rentLabel.setText(rentLabel.getText() + rent);
+        initialRentString = rentLabel.getText();
+        rentLabel.setText(initialRentString + rent);
     }
 
+    public void renewRent(int rent){
+        rentLabel.setText(initialRentString + rent);
+    }
+    
 }

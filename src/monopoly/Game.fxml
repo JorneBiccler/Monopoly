@@ -14,7 +14,7 @@
         </StackPane>
         <VBox fx:id="rightVBox" alignment="TOP_CENTER" prefHeight="780.0" prefWidth="524.0" spacing="10.0" visible="false">
             <children>
-                <TabPane fx:id="playerTabPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="300.0" prefWidth="286.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="300.0" />
+                <TabPane fx:id="playerTabPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="437.0" prefWidth="270.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="300.0" />
                 <ListView fx:id="logListView" prefHeight="200.0" prefWidth="200.0" />
                 <Label fx:id="currentPlayer" text="Huidige speler:" />
             </children>

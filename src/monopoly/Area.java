@@ -18,6 +18,16 @@ public class Area {
 
     private String id;
     private String colorString;
+    private int rentMultiplier;
+
+    public int getRentMultiplier() {
+        return rentMultiplier;
+    }
+
+    public void setRentMultiplier(int rentMultiplier) {
+        this.rentMultiplier = rentMultiplier;
+    }
+
 
     public Color getAreaColor() {
         Color color = Color.web(colorString);

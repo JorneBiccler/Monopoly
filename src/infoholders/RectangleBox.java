@@ -19,7 +19,7 @@ public class RectangleBox extends VBox {
 
     private final RectangleBoxCompanion rectangleCompanion;
 
-    public RectangleBox() {
+    public RectangleBox(Color color) {
         try {
             FXMLLoader imageLoader = new FXMLLoader(
                     getClass().getResource("RectangleBox.fxml"));
@@ -30,6 +30,7 @@ public class RectangleBox extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        rectangleCompanion.changeRectangleColor(color);
     }
 
     /**

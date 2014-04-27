@@ -6,8 +6,6 @@
 package infoholders;
 
 import java.io.IOException;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
@@ -20,21 +18,19 @@ import monopoly.*;
  *
  * @author Jorne Biccler
  */
-public abstract class InfoBox extends VBox implements InvalidationListener {
+public abstract class InfoBox extends VBox  {
 
     private final int position;
     protected final Space space;
     private final InfoBoxCompanion companion;
-    private final GameModel gameModel;
     protected final String propString;
     
-    public InfoBox(Space space, String propString, GameModel gameModel) {
+    public InfoBox(Space space, String propString) {
         this.position = space.getPosition();
         this.propString = propString;
         this.space = space;
-        this.gameModel = gameModel;
         setVisible(false);
-        this.gameModel.addListener(this);
+//        this.gameModel.addListener(this);
         try {
             FXMLLoader loader = new FXMLLoader(
                     InfoBox.class.getResource("InfoBox.fxml"));
@@ -86,16 +82,10 @@ public abstract class InfoBox extends VBox implements InvalidationListener {
         return space.getType();
     }
 
-    @Override
-    public void invalidated(Observable obs) {
-        
-    }
-
     public String getPropString() {
         return propString;
     }
 
-    public abstract void doAction(Player currentPlayer);
-    
+    public abstract void doAction(GameModel gameModel);
     
 }

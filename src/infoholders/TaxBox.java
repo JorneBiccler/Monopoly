@@ -6,7 +6,6 @@
 package infoholders;
 
 import monopoly.GameModel;
-import monopoly.Player;
 import monopoly.Space;
 import monopoly.SpaceType;
 
@@ -20,8 +19,8 @@ public class TaxBox extends InfoBoxWithImage {
     private final TaxLabelBoxCompanion labelBoxCompanion;
     private final int taxAmount;
 
-    public TaxBox(Space space, String propString, GameModel gameModel) {
-        super(space, propString, gameModel);
+    public TaxBox(Space space, String propString ) {
+        super(space, propString);
         if (SpaceType.TAX != space.getType()) {
             throw new IllegalArgumentException("er werd een ongeldig type ingegeven");
         }
@@ -38,8 +37,10 @@ public class TaxBox extends InfoBoxWithImage {
     }
 
     @Override
-    public void doAction(Player currentPlayer) {
-        currentPlayer.setBalance(currentPlayer.getBalance() - taxAmount);
+    public void doAction(GameModel gameModel) {
+        gameModel.getCurrentPlayer().decreaseBalance(taxAmount);
+        gameModel.increaseJackpot(taxAmount);
+        gameModel.doGameAction();
     }
 
      

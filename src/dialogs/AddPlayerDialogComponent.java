@@ -18,7 +18,6 @@ import monopoly.Player;
  */
 public class AddPlayerDialogComponent extends AnchorPane{
     private final AddPlayerDialogCompanion companion;
-    private ObservableList<Player> playerList;
     public AddPlayerDialogComponent(ObservableList<Player> playerList) {
           try {
             FXMLLoader loader = new FXMLLoader(
@@ -31,7 +30,6 @@ public class AddPlayerDialogComponent extends AnchorPane{
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.playerList = playerList;
     }
     
 }

@@ -5,7 +5,9 @@
  */
 package dialogs;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,14 +22,20 @@ public class ActionDialogCompanion {
     public Button noButton;
     public Label infoPropLabel;
     public Label actionQuestionLabel;
-    private final EventHandler<ActionEvent> yesHandler;
+    private final EventHandler<Event> yesHandler;
     private final String infoProp;
     private final String actionInfo;
-
-    public ActionDialogCompanion(String infoProp, String actionInfo, EventHandler<ActionEvent> yesHandler) {
+    private final EventHandler<Event> noHandler;
+    private final BooleanProperty disableYesButton;
+    
+    public ActionDialogCompanion(String infoProp, String actionInfo, 
+            EventHandler<Event> yesHandler, EventHandler<Event> noHandler,
+            BooleanProperty disableYesButton) {
         this.yesHandler = yesHandler;
+        this.noHandler = noHandler;
         this.infoProp = infoProp;
         this.actionInfo = actionInfo;
+        this.disableYesButton = disableYesButton;
     }
 
     public void initialize() {
@@ -35,6 +43,7 @@ public class ActionDialogCompanion {
         actionQuestionLabel.setText(actionInfo);
         yesButton.setOnAction(new finalYesHandler());
         noButton.setOnAction(new finalNoHandler());
+        yesButton.disableProperty().bind(disableYesButton);
     }
 
     class finalYesHandler implements EventHandler<ActionEvent> {
@@ -51,9 +60,11 @@ public class ActionDialogCompanion {
 
         @Override
         public void handle(ActionEvent t) {
+            noHandler.handle(t);
             noButton.getScene().getWindow().hide();
         }
 
     }
+    
 
 }

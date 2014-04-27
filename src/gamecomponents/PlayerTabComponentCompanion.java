@@ -9,9 +9,7 @@
  */
 package gamecomponents;
 
-import infoholders.InfoBox;
-import infoholders.InfoBoxWithImage;
-import infoholders.StreetBox;
+import infoholders.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -29,10 +27,12 @@ public class PlayerTabComponentCompanion {
 
     public Label balanceLabel;
     public Label positionLabel;
+    public Label jailCardLabel;
     public ListView<InfoBox> ownedCardsListView;
     public ObservableList<InfoBox> ownedCardsList;
     private String initialPositionString;
     private String initialBalanceString;
+    private String initialJailCardString;
 
     public PlayerTabComponentCompanion(ObservableList<InfoBox> ownedCardsList) {
         this.ownedCardsList = ownedCardsList;
@@ -43,14 +43,23 @@ public class PlayerTabComponentCompanion {
         initialBalanceString = balanceLabel.getText();
         initialPositionString = positionLabel.getText();
         ownedCardsListView.setItems(ownedCardsList);
-
+        initialJailCardString = jailCardLabel.getText();
+        jailCardLabel.setText(initialJailCardString + "neen");
         ownedCardsListView.setCellFactory(new Callback<ListView<InfoBox>, ListCell<InfoBox>>() {
             @Override
             public ListCell<InfoBox> call(ListView<InfoBox> ownedCardsListView) {
                 return new CardListCell();
             }
         });
-
+    }
+    
+    public void changeOwnsJailCard(boolean ownsJailCard){
+        if(ownsJailCard){
+            jailCardLabel.setText(initialJailCardString + "ja");
+        }
+        else{
+            jailCardLabel.setText(initialJailCardString + "neen");
+        }
     }
 
     public void changeBalance(int balance) {
@@ -75,9 +84,10 @@ public class PlayerTabComponentCompanion {
                     setGraphic(new Rectangle(30, 30, tempBox.getColor()));
                     setText(infoBox.getPropString());
                 } else {
-                    InfoBoxWithImage tempBox = (InfoBoxWithImage) infoBox;
+                    PurchasableBoxWithImage tempBox = (PurchasableBoxWithImage) infoBox;
                     ImageView tempImView = new ImageView(tempBox.getImage());
                     tempImView.setFitHeight(30);
+                    tempImView.setFitWidth(30);
                     tempImView.setPreserveRatio(true);
                     setGraphic(tempImView);
                     setText(tempBox.getPropString());

@@ -5,13 +5,9 @@
  */
 package infoholders;
 
-import dialogs.ActionDialog;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import monopoly.*;
 
 /**
@@ -19,30 +15,52 @@ import monopoly.*;
  *
  * @author Jorne Biccler
  */
-public class StreetBox extends InfoBox {
+public class StreetBox extends PurchasableBox implements InvalidationListener{
 
     private final RentableLabelBoxCompanion labelBoxCompanion;
     private final RectangleBox rectBox;
     private final int initialrent;
     private final int cost;
-    private Player owner;
     private Area area;
 
-    public StreetBox(Space space, String propString, GameModel gameModel) {
-        super(space, propString, gameModel);
+    public StreetBox(Space space, String propString, Area area) {
+        super(space, propString);
         if (SpaceType.STREET != space.getType()) {
             throw new IllegalArgumentException("er werd een ongeldig type ingegeven");
         }
         this.cost = space.getCost();
         this.initialrent = space.getRent0();
-        rectBox = new RectangleBox();
+        rectBox = new RectangleBox(area.getAreaColor());
         addNodeViewBox(rectBox);
         labelBoxCompanion = new RentableLabelBoxCompanion(space.getCost(), initialrent);
         String labelBoxFxmlPath = "RentableLabelBox.fxml";
         createLabelBox(labelBoxCompanion, labelBoxFxmlPath);
+        this.area = area;
     }
 
     public int getRent() {
+        if(model.getOwner() != null){
+            int count1 = 0;
+            int count2 = 0;
+            for(Space sp : MonopolyBoardComponent.board.getSpaces()){
+                if(sp.getType() == SpaceType.STREET){
+                    if(space.getArea().equals(sp.getArea())){
+                        count1++;
+                    }
+                }
+            }
+            for(InfoBox box : model.getOwner().getOwnedProperties()){
+                if(box.getSpaceType() == SpaceType.STREET){
+                    StreetBox cast = (StreetBox) box;
+                    if(cast.getArea().equals(getArea())){
+                    count2++;
+                    }
+                }
+            }
+            if(count1 == count2){
+                return 2*initialrent;
+            }
+        }
         return initialrent;
     }
 
@@ -62,34 +80,14 @@ public class StreetBox extends InfoBox {
         return area.getAreaColor();
     }
 
-    @Override
-    public void doAction(final Player currentPlayer) {
-        if (owner == null) {
-            Stage dialogStage = new Stage();
-            Scene dialogScene;
-            dialogScene = new Scene(new ActionDialog(propString, createActionString(),
-                    new EventHandler<ActionEvent>() {
-                        public void handle(ActionEvent t) {
-                            currentPlayer.addProperty(StreetBox.this);
-                            currentPlayer.setBalance(currentPlayer.getBalance() - getCost());
-                            owner = currentPlayer;
-                        }
-                    }));
-            dialogStage.setScene(dialogScene);
-            dialogStage.initStyle(StageStyle.UTILITY);
-            dialogStage.show();
-        } else if(!owner.equals(currentPlayer)) {
-            currentPlayer.setBalance(currentPlayer.getBalance() - getRent());
-        }
-    }
-
-    private String createActionString() {
-
-        return "Wil je " + propString + "kopen voor: €" + space.getCost() + " ?";
-    }
-
-    public int getCost() {
+     public int getCost() {
         return cost;
     }
-    
+
+    @Override
+    public void invalidated(Observable o) {
+        labelBoxCompanion.renewRent(getRent());
+        labelBoxCompanion.renewOwner(model.getOwner());           
+    }
+
 }

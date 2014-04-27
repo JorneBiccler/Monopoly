@@ -5,7 +5,8 @@
  */
 package dialogs;
 
-import java.io.IOException;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javax.xml.bind.JAXBException;
 import monopoly.GameComponent;
 import monopoly.Player;
 
@@ -46,22 +46,20 @@ public class StartDialogCompanion {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        try {
+                        
                             gameComponent.initializeGame(playerObsList);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (JAXBException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                       
                         startButton.getScene().getWindow().hide();
                     }
                 });
+
+        startButton.disableProperty().bind(new DisableAddPlayerBinding());
         addPlayerButton.setOnAction(new AddPlayerHandler());
+        startButton.disableProperty().bind(new DisableStartBinding());
         tokenColumn.setCellValueFactory(
                 new PropertyValueFactory<Player, ImageView>("tokenImageView"));
         nameColumn.setCellValueFactory(
-                new PropertyValueFactory<Player, String>("name"));
-        playerObsList = FXCollections.observableArrayList();
+                new PropertyValueFactory<Player, String>("name"));       
         tableView.setItems(playerObsList);
     }
 
@@ -78,4 +76,35 @@ public class StartDialogCompanion {
         }
     }
 
+    private class DisableStartBinding extends BooleanBinding {
+
+        public DisableStartBinding() {
+            bind(playerObsList);
+        }
+
+        @Override
+        protected boolean computeValue() {
+            if (playerObsList.size() < 2) {
+                return true;
+            }
+            return false;
+        }
+
+    }
+
+    private class DisableAddPlayerBinding extends BooleanBinding {
+
+        public DisableAddPlayerBinding() {
+            bind(Bindings.size(playerObsList));
+        }
+
+        @Override
+        protected boolean computeValue() {
+            if (playerObsList.size() >= 4) {
+                return true;
+            }
+            return false;
+        }
+
+    }
 }

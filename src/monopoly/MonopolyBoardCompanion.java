@@ -13,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import spacebox.*;
 
 /**
  * Partner klasse die bij een MonopolyBoard hoort
@@ -29,7 +28,7 @@ public class MonopolyBoardCompanion {
     public StackPane infoStackPane;
   
 
-    public void placeSpaceBoxes(SpaceBox[] ar) {
+    public void placeSpaceBoxes(Node[] ar) {
 
         hBoxDown.getChildren().add(ar[0]);
         hBoxUp.getChildren().add(ar[10]);

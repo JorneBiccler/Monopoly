@@ -42,6 +42,7 @@ public class PlayerTabComponent extends VBox implements InvalidationListener{
     public void invalidated(Observable o) {
         changePositionLabel("aan te passen");
         changeBalanceLabel(player.getBalance());
+        companion.changeOwnsJailCard(player.hasJailCard());
     }
     
     private void changePositionLabel(String positionID){

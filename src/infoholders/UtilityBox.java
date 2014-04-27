@@ -5,7 +5,8 @@
  */
 package infoholders;
 
-import monopoly.GameModel;
+import javafx.beans.Observable;
+import monopoly.GameComponent;
 import monopoly.Space;
 import monopoly.SpaceType;
 
@@ -18,8 +19,8 @@ public class UtilityBox extends PurchasableBoxWithImage {
 
     private final PurchasableLabelBoxCompanion labelBoxCompanion;
 
-    public UtilityBox(Space space, String propString, GameModel gameModel) {
-        super(space, propString, gameModel);
+    public UtilityBox(Space space, String propString ) {
+        super(space, propString);
         if (space.getType() != SpaceType.UTILITY) {
             throw new IllegalArgumentException("er werd een ongeldig type ingegeven");
         }
@@ -32,7 +33,28 @@ public class UtilityBox extends PurchasableBoxWithImage {
 
     @Override
     public int getRent() {
-        return 10050;
+        
+        int count = 0;
+        if(model.getOwner() !=null){
+            for(InfoBox box : model.getOwner().getOwnedProperties()){
+                if(box.getSpaceType() == SpaceType.UTILITY){
+                    count++;
+                }
+            }
+        }
+        if(count == 2){
+            return 10*GameComponent.diceButton.getDiceSum();
+        }
+        else{
+            return 4*GameComponent.diceButton.getDiceSum();
+        }
+        
+        
+    }
+
+    @Override
+    public void invalidated(Observable o) {
+        labelBoxCompanion.renewOwner(model.getOwner());
     }
 
 }

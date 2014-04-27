@@ -7,7 +7,6 @@ package infoholders;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import monopoly.GameModel;
 import monopoly.Space;
 
 /**
@@ -19,8 +18,8 @@ public abstract class InfoBoxWithImage extends InfoBox {
     protected Image image;
     protected final ImageView imageView = new ImageView();
 
-    public InfoBoxWithImage(Space space, String propString, GameModel gameModel) {
-        super(space, propString, gameModel);
+    public InfoBoxWithImage(Space space, String propString ) {
+        super(space, propString);
         imageView.setFitHeight(70);
         imageView.setFitWidth(130);
         imageView.setPreserveRatio(true);

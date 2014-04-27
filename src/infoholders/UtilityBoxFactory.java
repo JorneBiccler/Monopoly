@@ -5,7 +5,6 @@
  */
 package infoholders;
 
-import monopoly.GameModel;
 import monopoly.Space;
 
 /**
@@ -16,8 +15,8 @@ import monopoly.Space;
 public class UtilityBoxFactory implements InfoBoxFactory {
 
     @Override
-    public InfoBox create(Space space, String infoProp, GameModel gameModel) {
-        return new UtilityBox(space, infoProp, gameModel);
+    public InfoBox create(Space space, String infoProp) {
+        return new UtilityBox(space, infoProp);
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package monopoly;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -22,14 +23,16 @@ public class GameCompanion {
     public StackPane boardStackPane;
     public VBox rightVBox;
     public TabPane playerTabPane;
-    public ListView logListView;
+    public ListView<String> logListView;
     public Label currentPlayer;
     private  String initialCurrentPlayerStr;
 
     
     private final Image backgroundImage = new Image("/resources/bord.png");
     
-    
+    public void setObservableLogListView(ObservableList<String> list){
+        logListView.setItems(list);
+    }
     
     public void initialize() {
         backgroundView.setImage(backgroundImage);

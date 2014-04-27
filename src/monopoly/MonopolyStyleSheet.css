@@ -34,7 +34,7 @@
 }
 .spaceBox-unselected {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 3;
 }
 
 .spaceBox-HorLeft{
@@ -49,12 +49,12 @@
     -fx-alignment: TOP_CENTER;
 }
 
-.spaceBox-VertUp{
+.spaceBox-VertDown{
     -fx-alignment: BOTTOM_CENTER;
 }
 
 .spaceBox-Corner{
-    -fx-alignment: BOTTOM_LEFT;
+    -fx-alignment: CENTER;
 }
 
 

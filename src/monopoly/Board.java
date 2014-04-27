@@ -42,6 +42,11 @@ public class Board {
 
     public void setAreas(List<Area> areas) {
         this.areas = areas;
+        for(Area area: areas){
+            
+        }
+        
+        
     }
 
     @XmlElementWrapper(name = "spaces")
@@ -63,5 +68,6 @@ public class Board {
     public void setDecks(List<Deck> decks) {
         this.decks = decks;
     }
+    
 
 }

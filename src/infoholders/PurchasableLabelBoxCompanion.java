@@ -19,10 +19,8 @@ public class PurchasableLabelBoxCompanion implements LabelBoxCompanion {
 
     private int cost;
     public Label costLabel;
-    private Player owner;
     public Label ownerLabel;
     private String initialOwnerString;
-    private String initialCostString;
 
     public PurchasableLabelBoxCompanion(int cost) {
         this.cost = cost;
@@ -31,22 +29,9 @@ public class PurchasableLabelBoxCompanion implements LabelBoxCompanion {
     @Override
     public void initialize() {
         initialOwnerString = ownerLabel.getText();
-        initialCostString = costLabel.getText();
-        costLabel.setText(initialCostString + cost);
+        costLabel.setText(costLabel.getText() + cost);
         ownerLabel.setText(initialOwnerString + "niemand");
 
-    }
-
-    /**
-     * methode die een nieuwe kost instelt en ook het bijhorende label aanpast
-     */
-    public void renewCost(int cost) {
-        this.cost = cost;
-        costLabel.setText(initialCostString + cost);
-    }
-
-    public Player getOwner() {
-        return owner;
     }
 
     /**
@@ -54,8 +39,11 @@ public class PurchasableLabelBoxCompanion implements LabelBoxCompanion {
      * aanpast
      */
     public void renewOwner(Player owner) {
-        this.owner = owner;
-        ownerLabel.setText(initialOwnerString + owner.getName());
+        if (owner == null) {
+            ownerLabel.setText(initialOwnerString + "niemand");
+        } else {
+            ownerLabel.setText(initialOwnerString + owner.getName());
+        }
     }
 
 }

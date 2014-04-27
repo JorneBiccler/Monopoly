@@ -15,7 +15,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
@@ -65,7 +65,6 @@ public class SpaceBox extends FlowPane implements InvalidationListener {
         setOrientation(spaceBoxPos.getOrientation());
         setPrefWidth(spaceBoxPos.getWidth());
         setPrefHeight(spaceBoxPos.getHeight());
-        setAlignment(Pos.CENTER);
         getStyleClass().add(toggle.getCSSClass());
         getStyleClass().add(spaceBoxPos.getCSSClass());
         this.gameModel.addListener(this);
@@ -75,8 +74,19 @@ public class SpaceBox extends FlowPane implements InvalidationListener {
                 this.getChildren().add(pl.getTokenImageView());
             }
         }
-
+        updateSelection();
     }
+
+    public InfoBox getInfoBox() {
+        return infoBox;
+    }
+
+    public SpaceBoxPos getSpaceBoxPos() {
+        return spaceBoxPos;
+    }
+    
+    
+    
 
     /**
      * Methode die het uitzicht van een spaceBox aanpast als het model
@@ -84,26 +94,18 @@ public class SpaceBox extends FlowPane implements InvalidationListener {
      */
     @Override
     public void invalidated(Observable o) {
-
-        if (position != gameModel.getSelectedPosition()) {
-            toggle = Toggled.UNTOGGLED;
-        } else {
-            toggle = Toggled.TOGGLED;
-        }
-        getChildren().clear();
-
-        if (gameModel.getCurrentPlayer().getCurrentPosition() == position) {
-            getChildren().add(gameModel.getCurrentPlayer().getTokenImageView());
+        if (gameModel.getModelPosition()== position
+                && !getChildren().contains(gameModel.getCurrentPlayer().getTokenImageView())) {
+            ImageView temp = gameModel.getCurrentPlayer().getTokenImageView();
+            temp.setRotate(spaceBoxPos.getRotate());
+            getChildren().add(temp);
         }
 
-        updateView();
-        if (gameModel.getSelectedPosition() == position
-                && gameModel.getCurrentPlayer().getCurrentPosition() == position
-                && gameModel.getCurrentPlayer().isCanDoAction()) {
-            infoBox.doAction(gameModel.getCurrentPlayer());
-            System.out.println(gameModel.getCurrentPlayer().getOwnedProperties());
-            gameModel.getCurrentPlayer().setCanDoAction(false);
-            gameModel.nextPlayer();
+        updateSelection();
+        if (gameModel.getModelPosition() == position
+                && gameModel.isCanDoAction()) {
+            gameModel.setCanDoAction(false);
+            infoBox.doAction(gameModel);
         }
     }
 
@@ -123,24 +125,25 @@ public class SpaceBox extends FlowPane implements InvalidationListener {
 
     private void invertSelection() {
         if (toggle == Toggled.UNTOGGLED) {
-            toggle = Toggled.TOGGLED;
             gameModel.setSelectedPosition(position);
 
         } else {
-            toggle = Toggled.UNTOGGLED;
-            gameModel.setSelectedPosition(gameModel.getCurrentPlayer().getCurrentPosition());
+            gameModel.setSelectedPosition(gameModel.getModelPosition());
         }
-        updateView();
     }
 
-    private void updateView() {
-        getStyleClass().clear();
+    private void updateSelection() {
+        while(getStyleClass().remove(toggle.getCSSClass()));
+        if (position != gameModel.getSelectedPosition()) {
+            toggle = Toggled.UNTOGGLED;
+        } else {
+            toggle = Toggled.TOGGLED;
+        }
+        
         getStyleClass().add(toggle.getCSSClass());
-        getStyleClass().add(spaceBoxPos.getCSSClass());
         if (toggle == Toggled.TOGGLED) {
             infoBox.setVisible(true);
         } else {
-
             infoBox.setVisible(false);
         }
     }

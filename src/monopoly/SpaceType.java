@@ -16,11 +16,12 @@ import java.util.EnumSet;
  */
 public enum SpaceType {
 
-    START, JAIL, CHANCE, CHEST, GO_TO_JAIL, RAILWAY, UTILITY, STREET, TAX, FREE_PARKING;
+    START, JAIL
+    , CHANCE, CHEST, GO_TO_JAIL, RAILWAY, UTILITY, STREET, TAX, FREE_PARKING;
 
     public static final EnumSet<SpaceType> SPECIAL_TYPES = EnumSet.of(START, JAIL,
-            CHANCE, CHEST, GO_TO_JAIL, FREE_PARKING);
-
+             GO_TO_JAIL, FREE_PARKING);
+    public static final EnumSet<SpaceType> OWNABLE_TYPES = EnumSet.of(STREET,UTILITY,RAILWAY);
     public String toLowerCase() {
         return name().toLowerCase();
     }

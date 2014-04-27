@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -26,10 +25,8 @@ public class Monopoly extends Application {
         Stage dialogStage = new Stage();
         Scene dialogScene = new Scene(new StartDialogComponent(root));
         dialogStage.setScene(dialogScene);
-        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.show();    
         
-        System.out.println(System.getProperties().get("javafx.runtime.version"));
         
 //        final Dice dice = new Dice();
 //        Button btn = new Button();

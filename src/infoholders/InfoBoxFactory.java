@@ -5,7 +5,6 @@
  */
 package infoholders;
 
-import monopoly.GameModel;
 import monopoly.Space;
 
 /**
@@ -15,5 +14,5 @@ import monopoly.Space;
  */
 public interface InfoBoxFactory {
 
-    public InfoBox create(Space space, String infoProp, GameModel gameModel);
+    public InfoBox create(Space space, String infoProp );
 }
