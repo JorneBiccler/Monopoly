@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--    Auteur: Jorne Biccler
+Project: ugentopoly
+Vak: Programmeren 2 -->
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="gameBox" prefHeight="780.0" prefWidth="1050" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="gameBox" prefHeight="780.0" prefWidth="1052.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <StackPane fx:id="boardStackPane" prefHeight="780.0" prefWidth="780.0">
             <children>
                 <ImageView fx:id="backgroundView" fitHeight="780.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </StackPane>
-        <VBox fx:id="rightVBox" alignment="TOP_CENTER" prefHeight="780.0" prefWidth="524.0" spacing="10.0" visible="false">
+        <VBox alignment="TOP_LEFT" fx:id="rightVBox" prefHeight="780.0" prefWidth="287.0" spacing="10.0" visible="false">
             <children>
-                <TabPane fx:id="playerTabPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="437.0" prefWidth="270.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="300.0" />
-                <ListView fx:id="logListView" prefHeight="200.0" prefWidth="200.0" />
-                <Label fx:id="currentPlayer" text="Huidige speler:" />
+                <TabPane fx:id="playerTabPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="331.0" prefWidth="270.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="300.0" />
+                <ListView fx:id="logListView" prefHeight="304.0" prefWidth="272.0" />
+                <VBox prefHeight="220.0" prefWidth="272.0" spacing="10.0" alignment="TOP_LEFT">
+                    <children>
+                        <Label fx:id="jackpotLabel" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="194.0" text="Bedrag in de bonuspot: €" />
+                        <Label fx:id="currentPlayer" alignment="TOP_LEFT" prefHeight="54.0" prefWidth="194.0" text="Huidige speler: " />
+                        <Button fx:id="diceButton" mnemonicParsing="false" text="Gooi de dobbelstenen" />
+                    </children>
+                    <padding>
+                        <Insets left="20.0" />
+                    </padding>
+                </VBox>
             </children>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
         </VBox>
     </children>
 </fx:root>

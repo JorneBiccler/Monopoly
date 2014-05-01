@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package dialogs;
 
@@ -13,6 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
+ * Partner klasse horend bij een ActionDialog, er zijn twee binneklassen die de
+ * eventhandlers van de button's zijn zoals het in ActionDialog gespecificeerd
+ * staat.
  *
  * @author Jorne Biccler
  */
@@ -27,8 +30,8 @@ public class ActionDialogCompanion {
     private final String actionInfo;
     private final EventHandler<Event> noHandler;
     private final BooleanProperty disableYesButton;
-    
-    public ActionDialogCompanion(String infoProp, String actionInfo, 
+
+    public ActionDialogCompanion(String infoProp, String actionInfo,
             EventHandler<Event> yesHandler, EventHandler<Event> noHandler,
             BooleanProperty disableYesButton) {
         this.yesHandler = yesHandler;
@@ -63,8 +66,6 @@ public class ActionDialogCompanion {
             noHandler.handle(t);
             noButton.getScene().getWindow().hide();
         }
-
     }
-    
 
 }

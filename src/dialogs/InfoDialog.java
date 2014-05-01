@@ -6,7 +6,6 @@
 package dialogs;
 
 import java.io.IOException;
-import javafx.beans.property.BooleanProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -19,26 +18,23 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
- * Basis uitbreiding van Stage die een dialoog meet een ja en neen knop
- * weergeeft, Er moet een extra Eventhandler megegeven worden voor deze knoppen
- * (de Handle methode wordt dan opgeroepen als er geklikt wordt waarna het
- * dialoogje gesloten wordt). Indien deze dialog met de close button gesloten
- * wordt dan wordt standaard de extraNoHandler ook uitegevoerd.
+ * Basis uitbreiding van Stage die een dialoog meet een ok knop weergeeft, Er
+ * moet een extra okHandler megegeven worden voor deze knoppen (de Handle
+ * methode wordt dan opgeroepen als er geklikt wordt waarna het dialoogje
+ * gesloten wordt). Indien deze dialog met de close button gesloten wordt dan
+ * wordt standaard de extraOkHandler ook uitegevoerd.
  *
  * @author Jorne Biccler
  */
-public class ActionDialog extends Stage {
+public class InfoDialog extends Stage {
 
-    private final ActionDialogCompanion companion;
+    private InfoDialogCompanion companion;
 
-    public ActionDialog(String infoProp, String actionInfo,
-            EventHandler<Event> extraYesHandler, final EventHandler<Event> extraNoHandler,
-            BooleanProperty disableYesButton) {
-
+    public InfoDialog(String infoProp, String info, final EventHandler<Event> extraOkHandler) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("ActionDialog.fxml"));
-            this.companion = new ActionDialogCompanion(infoProp, actionInfo, extraYesHandler, extraNoHandler, disableYesButton);
+                    getClass().getResource("InfoDialog.fxml"));
+            this.companion = new InfoDialogCompanion(infoProp, info, extraOkHandler);
             loader.setController(companion);
             Parent root = (AnchorPane) loader.load();
             Scene scene = new Scene(root);
@@ -51,9 +47,8 @@ public class ActionDialog extends Stage {
         setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {
-                extraNoHandler.handle(t);
+                extraOkHandler.handle(t);
             }
         });
     }
-
 }

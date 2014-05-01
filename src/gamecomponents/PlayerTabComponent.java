@@ -1,9 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package gamecomponents;
 
 import java.io.IOException;
@@ -11,13 +10,19 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
+import monopoly.MonopolyBoardComponent;
 import monopoly.Player;
 
 /**
+ * Standaard uitbreiding van VBox die diene om als Tab-Obsjecten te gebruiken in
+ * de main gameComponent. Deze is bedoelt om de standaard informatie van de
+ * status van een speler bij te houden (eigendommen, plaats, ...), en luistert
+ * bijgevolg naar een speler model.
  *
- * @author jorne
+ * @author Jorne Biccler
  */
-public class PlayerTabComponent extends VBox implements InvalidationListener{
+public class PlayerTabComponent extends VBox implements InvalidationListener {
+
     private final Player player;
     private final PlayerTabComponentCompanion companion;
 
@@ -36,31 +41,39 @@ public class PlayerTabComponent extends VBox implements InvalidationListener{
         }
         player.addListener(this);
         changeBalanceLabel(player.getBalance());
+        changePositionLabel(player.getCurrentPosition());
     }
 
+    /**
+     * Als deze methode opgeroepen wordt zal het positieLabel en de balans op de
+     * gepaste wijze aangepost worden.
+     */
     @Override
     public void invalidated(Observable o) {
-        changePositionLabel("aan te passen");
         changeBalanceLabel(player.getBalance());
-        companion.changeOwnsJailCard(player.hasJailCard());
+        changeOwnsJailCard(player.hasJailCard());
+        changePositionLabel(player.getCurrentPosition());
     }
-    
-    private void changePositionLabel(String positionID){
-        companion.changePosition(positionID);
+
+    private void changeOwnsJailCard(boolean ownsJailCarde) {
+        companion.changeOwnsJailCard(ownsJailCarde);
     }
-    
-    private void changeBalanceLabel(int balance){
+
+    private void changeBalanceLabel(int balance) {
         companion.changeBalance(balance);
     }
-    
-    public Player getModel(){
+
+    public Player getModel() {
         return player;
     }
-   
-            
-    
-    
-    
-    
-    
+
+    /**
+     * past het positieLabel op de gepaste manier aan, gegeven de huidige
+     * positie.
+     */
+    private void changePositionLabel(int position) {
+        String propertyKey = MonopolyBoardComponent.board.getSpaceIdMap().get(position);
+        companion.changePosition(MonopolyBoardComponent.boardProperties.getProperty(propertyKey));
+    }
+
 }

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
@@ -11,7 +11,9 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
 /**
- *
+ * Model horende bij koopbare vakjes, dit model luistert zelf ook naar
+ * veranderingen van de bijhorende eigenaar.
+ * 
  * @author Jorne Biccler
  */
 public class OwnerModel implements Observable, InvalidationListener {

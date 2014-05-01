@@ -1,21 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoholders;
 
+import basicgameinfo.Space;
 import monopoly.GameModel;
-import monopoly.Space;
 
 /**
+ * Uitbreiding van SpecialBox die met een goToJail vakje correspondeert.
  *
- * @author jorne
+ * @author Jorne Biccler
  */
-public class GoToJailBox extends SpecialBox{
+public class GoToJailBox extends SpecialBox {
 
-    public GoToJailBox(Space space, String propString  ) {
+    public GoToJailBox(Space space, String propString) {
         super(space, propString);
     }
 
@@ -23,5 +23,5 @@ public class GoToJailBox extends SpecialBox{
     public void doAction(GameModel gameModel) {
         gameModel.sentCurrentPlayerToJail();
     }
-    
+
 }

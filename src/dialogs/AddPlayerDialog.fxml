@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root id="AnchorPane" prefHeight="200.0" prefWidth="300.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label layoutX="14.0" layoutY="25.0" text="Voeg een nieuwe speler toe" />
  
@@ -20,4 +20,4 @@
         </TilePane>  
         <Button fx:id="addPlayerButton" layoutX="90.0" layoutY="161.0" mnemonicParsing="false" text="Voeg speler toe" />
     </children>
-</fx:root>
+</AnchorPane>

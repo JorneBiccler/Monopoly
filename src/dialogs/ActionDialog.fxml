@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--    Auteur: Jorne Biccler
+Project: ugentopoly
+Vak: Programmeren 2 -->
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="192.0" prefWidth="434.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+
+<AnchorPane id="AnchorPane" prefHeight="224.0" prefWidth="434.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="infoPropLabel" layoutX="49.0" layoutY="40.0" prefHeight="25.0" prefWidth="288.0" text="Label" />
-        <Label fx:id="actionQuestionLabel" layoutX="59.0" layoutY="78.0" prefHeight="52.0" prefWidth="316.0" text="Label" />
-        <Button fx:id="yesButton" layoutX="122.15673828125" layoutY="137.5" mnemonicParsing="false" prefWidth="60.0" text="Ja" />
-        <Button fx:id="noButton" layoutX="217.2275390625" layoutY="137.5" mnemonicParsing="false" prefWidth="60.0" text="Neen" />
+        <Label fx:id="actionQuestionLabel" layoutX="59.0" layoutY="84.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="72.0" prefWidth="316.0" text="Label" wrapText="true" />
+        <Button fx:id="yesButton" layoutX="121.0" layoutY="175.0" mnemonicParsing="false" prefWidth="60.0" text="Ja" />
+        <Button fx:id="noButton" layoutX="233.0" layoutY="175.0" mnemonicParsing="false" prefWidth="60.0" text="Neen" />
+        <HBox alignment="CENTER_LEFT" layoutY="-3.0" prefHeight="87.0" prefWidth="434.0" styleClass="blueBackground">
+            <children>
+                <Label fx:id="infoPropLabel" layoutX="49.0" layoutY="40.0" prefHeight="59.0" prefWidth="290.0" text="Label" />
+                <ImageView fitHeight="63.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" >
+                    <image>
+                        <Image url="@/resources/warning.png" />
+                    </image>
+                </ImageView>
+            </children>
+            <padding>
+                <Insets left="30.0" />
+            </padding>
+        </HBox>
     </children>
+    <stylesheets>
+        <URL value="@/resources/MonopolyStyleSheet.css" />
+    </stylesheets>
+
 </AnchorPane>

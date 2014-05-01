@@ -5,6 +5,8 @@
  */
 package infoholders;
 
+import basicgameinfo.Space;
+import basicgameinfo.SpaceType;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -30,7 +32,6 @@ public abstract class InfoBox extends VBox  {
         this.propString = propString;
         this.space = space;
         setVisible(false);
-//        this.gameModel.addListener(this);
         try {
             FXMLLoader loader = new FXMLLoader(
                     InfoBox.class.getResource("InfoBox.fxml"));
@@ -61,12 +62,6 @@ public abstract class InfoBox extends VBox  {
     protected void addNodeBottomBox(Node node) {
         companion.getBottomBox().getChildren().add(node);
     }
-
-    /**
-     * methode die een ImageBox aanmaakt met de afbeelding horende bij het
-     * gegeven pad en deze in de viewBox plaatst.
-     */
-
 
     /**
      * methode die een LabelBox aanmaakt met de afbeelding horende bij het

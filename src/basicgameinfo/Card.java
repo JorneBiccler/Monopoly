@@ -1,15 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-package monopoly;
+package basicgameinfo;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * Klasse die de standaard info rond kaartjes objecten bijhoudt i.h.b. zo
+ * opgesteld dat ze van JAXB gebruik kan maken.
  *
- * @author jorne
+ * @author Jorne Biccler
  */
 public class Card {
 
@@ -21,7 +23,7 @@ public class Card {
     private int relative;
 
     @XmlAttribute
-    public CardType getType(){
+    public CardType getType() {
         return type;
     }
 

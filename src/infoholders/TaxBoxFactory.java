@@ -5,7 +5,7 @@
  */
 package infoholders;
 
-import monopoly.Space;
+import basicgameinfo.Space;
 
 /**
  * Factory voor TaxBoxen.
@@ -15,7 +15,7 @@ import monopoly.Space;
 public class TaxBoxFactory implements InfoBoxFactory {
 
     @Override
-    public InfoBox create(Space space, String infoProp  ) {
+    public InfoBox create(Space space, String infoProp) {
         return new TaxBox(space, infoProp);
     }
 

@@ -1,11 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package dialogs;
 
-import javafx.beans.binding.BooleanBinding;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +18,14 @@ import monopoly.Player;
 import monopoly.Token;
 
 /**
+ * De partner klasse van een AddPlayerDialog
  *
  * @author Jorne Biccler
  */
 public class AddPlayerDialogCompanion {
 
-    private static final Token[] tokenAr = {new Token("/resources/token1.png", "Wina"),
+    private static final Token[] tokenAr = {
+        new Token("/resources/token1.png", "Wina"),
         new Token("/resources/token2.png", "VTK"),
         new Token("/resources/token3.png", "Chemica"),
         new Token("/resources/token4.png", "Filologica"),
@@ -38,6 +41,12 @@ public class AddPlayerDialogCompanion {
     private ObservableList<Token> obsList;
     private ObservableList<Player> playerList;
 
+    /**
+     * De constructor neemt een lijst van spelers, en zorgt er voor dat de reeds
+     * gebruikte pionen niet meer getoond zullen worden.
+     *
+     * @param playerList
+     */
     public AddPlayerDialogCompanion(ObservableList<Player> playerList) {
         obsList = FXCollections.observableArrayList();
         for (Token token : tokenAr) {
@@ -56,36 +65,10 @@ public class AddPlayerDialogCompanion {
 
     public void initialize() {
         tokenBox.setItems(obsList);
-        addPlayerButton.disableProperty().bind(new SpecialBinding());
+        addPlayerButton.setDisable(true);
+        colorPicker.valueProperty().addListener(dummyDisableListener);
+        nameField.textProperty().addListener(dummyDisableListener);
         addPlayerButton.setOnAction(new AddPlayerHandler());
-
-        Callback<ListView<Token>, ListCell<Token>> cellFactory = new Callback<ListView<Token>, ListCell<Token>>() {
-            @Override
-            public ListCell<Token> call(ListView<Token> p) {
-                return new ListCell<Token>() {
-                    private final ImageView imageView = new ImageView();
-
-                    {
-                        imageView.setFitHeight(30);
-                        imageView.setPreserveRatio(true);
-                    }
-
-                    @Override
-                    protected void updateItem(Token item, boolean empty) {
-                        super.updateItem(item, empty);
-
-                        if (item == null || empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            imageView.setImage(item.getImage());
-                            setGraphic(imageView);
-                            setText(item.getName());
-                        }
-                    }
-                };
-            }
-        };
         tokenBox.setButtonCell(cellFactory.call(null));
         tokenBox.setCellFactory(cellFactory);
 
@@ -100,15 +83,15 @@ public class AddPlayerDialogCompanion {
         }
     }
 
-    private class SpecialBinding extends BooleanBinding {
+    /*
+     * een InvalidationListener die gebruikt wordt om naar het TextField 
+     * en de color picker te luisteren, indien de naam/kleur reeds in gebruik is
+     * zal deze de knop disabelen. Ook indien er reeds 4 spelers zijn kan er geen
+     * nieuwe speler meer toegevoegd worden.
+     */
+    private InvalidationListener dummyDisableListener = new InvalidationListener() {
 
-        public SpecialBinding() {
-            bind(nameField.textProperty());
-            bind(colorPicker.valueProperty());
-        }
-
-        @Override
-        protected boolean computeValue() {
+        private boolean computeValue() {
             if (playerList.size() == 0) {
                 if (nameField.getText().equals("") || tokenBox.getValue() == null) {
                     return true;
@@ -121,10 +104,51 @@ public class AddPlayerDialogCompanion {
                     return true;
                 }
             }
-            if(playerList.size() >= 4){
+            if (playerList.size() >= 4) {
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public void invalidated(Observable o) {
+            addPlayerButton.setDisable(computeValue());
+        }
+    };
+
+    /*
+     * cellFactory die de cellen voor de pionen creëert.
+     */
+    private final Callback<ListView<Token>, ListCell<Token>> cellFactory = new Callback<ListView<Token>, ListCell<Token>>() {
+        @Override
+        public ListCell<Token> call(ListView<Token> p) {
+            return new tokenCell();
+        }
+    };
+
+    /*
+     * de cell bevat de gewenste imageview als grphic en als text de gewenste tekst.
+     */
+    private class tokenCell extends ListCell<Token> {
+
+        private final ImageView imageView = new ImageView();
+
+        public tokenCell() {
+            imageView.setFitHeight(20);
+            imageView.setPreserveRatio(true);
+        }
+
+        @Override
+        protected void updateItem(Token item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item == null || empty) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                imageView.setImage(item.getImage());
+                setGraphic(imageView);
+                setText(item.getName());
+            }
         }
     }
 

@@ -1,21 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package infoholders;
 
-import dialogs.InfoDialogComponent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.stage.Stage;
+import basicgameinfo.Space;
+import monopoly.GameComponent;
 import monopoly.GameModel;
 import monopoly.Player;
-import monopoly.Space;
 
 /**
+ * Een uitbreiding van SpecialBox die met een freeParking vakje correspondeert.
  *
- * @author jorne
+ * @author Jorne Biccler
  */
 public class FreeParkingBox extends SpecialBox {
 
@@ -23,26 +21,19 @@ public class FreeParkingBox extends SpecialBox {
         super(space, propString);
     }
 
+    /**
+     * De bonusPot wordt op de gepaste manier geledigd.
+     */
     @Override
-    public void doAction(final GameModel gameModel) {
-        final Player currentPlayer = gameModel.getCurrentPlayer();
-        final int jackpot = gameModel.getJackpot();
-
+    public void doAction(GameModel gameModel) {
+        Player currentPlayer = gameModel.getCurrentPlayer();
+        int jackpot = gameModel.getJackpot();
         if (gameModel.getJackpot() > 0) {
-            Stage dialogStage = new InfoDialogComponent(propString, "Je hebt €" + jackpot + " ontvangen",
-                    new EventHandler<Event>() {
-                        public void handle(Event t) {
-                            currentPlayer.increaseBalance(jackpot);
-                            gameModel.setJackpot(0);
-                            gameModel.doGameAction();
-                        }
-                    }
-            );
-            dialogStage.show();
-        }   
-        else{
-            gameModel.doGameAction();
+            gameModel.resetJackpot();
+            GameComponent.logListWrapper.addMessage("getJackpot", new Object[]{
+                currentPlayer.getName(), jackpot});
         }
+        gameModel.nextTurn();
     }
 
 }

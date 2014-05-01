@@ -1,6 +1,6 @@
 package monopoly;
 
-import dialogs.StartDialogComponent;
+import dialogs.StartDialog;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,47 +12,19 @@ import javax.xml.bind.JAXBException;
  * @author Bart Mesuere <Bart.Mesuere@UGent.be>
  */
 public class Monopoly extends Application {
+    
     @Override
     public void start(Stage primaryStage) throws IOException, JAXBException{
         
-        GameComponent root = new GameComponent();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/monopoly/MonopolyStyleSheet.css");
+        GameComponent gameComponent = new GameComponent();
+        Scene scene = new Scene(gameComponent);
+        scene.getStylesheets().add("/resources/MonopolyStyleSheet.css");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
         
-        Stage dialogStage = new Stage();
-        Scene dialogScene = new Scene(new StartDialogComponent(root));
-        dialogStage.setScene(dialogScene);
+        Stage dialogStage = new StartDialog(gameComponent);
         dialogStage.show();    
-        
-        
-//        final Dice dice = new Dice();
-//        Button btn = new Button();
-//        btn.setText("Rol dobbelstenen");
-//        btn.setOnAction(new EventHandler<ActionEvent>() {
-//
-//            @Override
-//            public void handle(ActionEvent event) {
-//                dice.roll(new EventHandler<ActionEvent>() {
-//
-//                    @Override
-//                    public void handle(ActionEvent t) {
-//                        System.out.println("Klaar met rollen");
-//                    }
-//                });
-//            }
-//        });
-//
-//        StackPane root = new StackPane();
-//        root.getChildren().add(btn);
-//
-//        Scene scene = new Scene(root, 300, 250);
-//
-//        primaryStage.setTitle("Dobbelstenen");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
     }
 
     /**
@@ -66,5 +38,7 @@ public class Monopoly extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    
 
 }

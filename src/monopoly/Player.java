@@ -5,7 +5,12 @@
  */
 package monopoly;
 
+import basicgameinfo.Area;
+import basicgameinfo.Card;
+import basicgameinfo.Deck;
+import basicgameinfo.SpaceType;
 import infoholders.InfoBox;
+import infoholders.StreetBox;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +19,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
@@ -33,51 +37,55 @@ public class Player implements Observable {
     private ObservableList<InfoBox> ownedProperties = FXCollections.observableArrayList();
     private int currentPosition;
     private int balance;
-    private boolean canDoAction;
     private boolean inJail;
-    private final Map<SpaceType,Card> jailCardMap = new HashMap<>();
-    
-    public void addJailCard(SpaceType deckType,Card jailCard){
-        jailCardMap.put(deckType,jailCard);
-        fireInvalidationEvent();
-    }
-
-    public boolean hasJailCard(){
-        return (jailCardMap.size() > 0) ;
-    }
-    
-    public boolean useJailCard(){
-        boolean usedCard = false;
-        for(Deck deck : MonopolyBoardComponent.board.getDecks()){
-            if(jailCardMap.containsKey(deck.getType()) && !usedCard){
-                deck.getDeckList().add(jailCardMap.get(deck.getType()));
-                jailCardMap.remove(deck.getType());
-                usedCard = true;
-            }
-        }
-        setInJail(!usedCard);
-        return usedCard;
-    }
-    
-    public boolean isCanDoAction() {
-        return canDoAction;
-    }
-
-    public void setCanDoAction(boolean canDoAction) {
-        this.canDoAction = canDoAction;
-    }
+    private final Map<SpaceType, Card> jailCardMap = new HashMap<>();
 
     public Player(String name, Token token, Color color, int startBalance) {
         this.name = name;
         this.color = color;
         this.token = token;
-        this.balance = balance;
+        this.balance = MonopolyBoardComponent.board.getSettings().getBalance();
         this.tokenImageView = new ImageView(token.getImage());
         tokenImageView.setFitHeight(25);
         tokenImageView.setFitWidth(15);
         currentPosition = 0;
-        canDoAction = false;
         inJail = false;
+    }
+
+    /**
+     * voeg een get out of jail kaartje toe.
+     *
+     * @param deckType
+     * @param jailCard
+     */
+    public void addJailCard(SpaceType deckType, Card jailCard) {
+        jailCardMap.put(deckType, jailCard);
+        fireInvalidationEvent();
+    }
+
+    public boolean hasJailCard() {
+        return (jailCardMap.size() > 0);
+    }
+
+    /**
+     * probeer een get ouf of jail kaartje te gebruiken, indien dit lukt wordt
+     * true terug gegeven, indien niet false; het kaartje wordt ook terug in het
+     * gepaste deck gestoken. Opgelet: roep deze m
+     */
+    public boolean useJailCard() {
+        boolean usedCard = false;
+        if (isInJail()) {
+            for (Deck deck : MonopolyBoardComponent.board.getDecks()) {
+                if (jailCardMap.containsKey(deck.getType()) && !usedCard) {
+                    deck.getDeckList().add(jailCardMap.get(deck.getType()));
+                    jailCardMap.remove(deck.getType());
+                    usedCard = true;
+                    fireInvalidationEvent();
+                }
+            }
+            setInJail(!usedCard);
+        }
+        return usedCard;
     }
 
     public boolean isInJail() {
@@ -90,10 +98,6 @@ public class Player implements Observable {
 
     public String getName() {
         return name;
-    }
-
-    public Image getTokenImage() {
-        return token.getImage();
     }
 
     public Color getColor() {
@@ -125,18 +129,6 @@ public class Player implements Observable {
         fireInvalidationEvent();
     }
 
-    public void removeProperty(InfoBox property) {
-        ownedProperties.remove(property);
-        fireInvalidationEvent();
-    }
-
-    public void changePosition(int newPosition) {
-        currentPosition = newPosition;
-        fireInvalidationEvent();
-    }
-
-  
-
     public int getCurrentPosition() {
         return currentPosition;
     }
@@ -154,33 +146,49 @@ public class Player implements Observable {
         return token;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
-        fireInvalidationEvent();
-    }
-
     public ObservableList<InfoBox> getOwnedProperties() {
         return ownedProperties;
     }
 
-    public int numberOfTypeOwnedCounter(SpaceType type) {
-        int temp = 0;
-        for (InfoBox info : ownedProperties) {
-            if (info.getSpaceType() == type) {
-                temp++;
-            }
-        }
-        return temp;
-    }
-
-    
-    public void decreaseBalance(int amount){
+    public void decreaseBalance(int amount) {
         balance -= amount;
         fireInvalidationEvent();
     }
-    public void increaseBalance(int amount){
+
+    public void increaseBalance(int amount) {
         balance += amount;
         fireInvalidationEvent();
     }
-    
+
+    /**
+     * Geeft het aantal properties van een bepaalde Spacetype die de speler
+     * bezit terug
+     */
+    public int numberOwnedOfSomeType(SpaceType type) {
+        int count = 0;
+        for (InfoBox box : ownedProperties) {
+            if (box.getSpaceType() == type) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Geeft het aantal properties van een bepaalde Area die de speler bezit
+     * terug
+     */
+    public int numberOwnedOfSomeArea(Area area) {
+        int count = 0;
+        for (InfoBox box : getOwnedProperties()) {
+            if (box.getSpaceType() == SpaceType.STREET) {
+                StreetBox streetCast = (StreetBox) box;
+                if (streetCast.getArea().equals(area)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 }

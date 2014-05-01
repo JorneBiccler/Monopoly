@@ -1,32 +1,29 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
 package infoholders;
 
-import dialogs.ActionDialog;
+import basicgameinfo.Space;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import javafx.beans.InvalidationListener;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import monopoly.GameModel;
-import monopoly.OwnerModel;
-import monopoly.Player;
-import monopoly.Space;
+import monopoly.*;
 
 /**
- *
- * @author jorne
+ * Uitbreiding van InfoBox deze toont de info weer van vakjes die koopbaar zijn,
+ * er is dus een owner label, en een ownermodel, indien het model verandert moeten 
+ * de gepaste labels aangepast worden.
+ * @author Jorne Biccler
  */
-public abstract class PurchasableBox extends InfoBox implements InvalidationListener{
-   protected OwnerModel model = new OwnerModel();
+public abstract class PurchasableBox extends InfoBox implements InvalidationListener {
+
+    protected OwnerModel model = new OwnerModel();
     protected int initialRent;
-    protected final ImageView imageView = new ImageView();
-    private int cost;
+    protected int cost;
 
     public PurchasableBox(Space space, String propString) {
         super(space, propString);
@@ -35,46 +32,66 @@ public abstract class PurchasableBox extends InfoBox implements InvalidationList
         model.addListener(this);
     }
 
-    @Override
-    public void doAction(final GameModel gameModel) {
-        final Player currentPlayer = gameModel.getCurrentPlayer();
-        if (model.getOwner() == null) {
-            Stage dialogStage = new ActionDialog(propString, createActionString(),
-                    new EventHandler<Event>() {
-                        public void handle(Event t) {
-                            currentPlayer.addProperty(PurchasableBox.this);
-                            model.setOwner(currentPlayer);
-                            model.getOwner().decreaseBalance(cost);
-                            gameModel.doGameAction();
-                        }
-                    },
-                    new EventHandler<Event>() {
-                        @Override
-                        public void handle(Event t) {
-                            gameModel.doGameAction();
-                        }
-                    },
-                    new ReadOnlyBooleanWrapper(!(currentPlayer.getBalance() > cost)));
-            dialogStage.show();
-        } else if (!model.getOwner().equals(currentPlayer)) {
-            currentPlayer.decreaseBalance(getRent());
-            gameModel.doGameAction();
-        } else {
-            gameModel.doGameAction();
+    public OwnerModel getModel() {
+        return model;
+    }
+
+    /**
+     * methode die de String die in een standaard ActionDialog getoond moet worden
+     * opmaakt.
+     */
+    protected String createActionString() {
+        ResourceBundle bundle = ResourceBundle.getBundle("resources/allKindsOfText");
+        String pattern = bundle.getString("standardBuy");
+        MessageFormat mf = new MessageFormat(pattern);
+        return mf.format(new Object[]{propString,cost});
+    }
+
+     /**
+     * Standaard eventHandler die gebruikt wordt bij een koopbaar vakje,
+     * indien het vakje gekocht wordt wordt het ownerModel aangepast,
+     * de koper zijn balans wordt angepast, ...
+     */    
+    protected class StandardActionYesHandler implements EventHandler<Event> {
+
+        private final Player currentPlayer;
+        private final GameModel gameModel;
+
+        public StandardActionYesHandler(GameModel gameModel) {
+            this.currentPlayer = gameModel.getCurrentPlayer();
+            this.gameModel = gameModel;
+        }
+
+        public void handle(Event t) {
+            currentPlayer.addProperty(PurchasableBox.this);
+            model.setOwner(currentPlayer);
+            model.getOwner().decreaseBalance(cost);
+
+            GameComponent.logListWrapper.addMessage("buyPropertyString", new Object[]{
+                currentPlayer.getName(), propString, cost});
+            gameModel.nextTurn();
         }
     }
 
-    public abstract int getRent();
-
-    public OwnerModel getModel(){
-        return model;
-    }
+    /**
+     * standaard noHandler die in deze setting gebruikt wordt, doet niets meer dan 
+     * aan het gameModel door te geven dat er een volgende beurt mag komen.
+     */
     
-    private String createActionString() {
+    protected class StandardActionNoHandler implements EventHandler<Event> {
 
-        return "Wil je " + propString + " kopen voor: €" + space.getCost() + " ?";
+        private final GameModel gameModel;
+
+        public StandardActionNoHandler(GameModel gameModel) {
+            this.gameModel = gameModel;
+        }
+
+        @Override
+        public void handle(Event t) {
+            gameModel.nextTurn();
+        }
     }
-
-
 
 }
+
+

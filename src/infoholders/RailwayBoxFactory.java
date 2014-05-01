@@ -5,7 +5,7 @@
  */
 package infoholders;
 
-import monopoly.Space;
+import basicgameinfo.Space;
 
 /**
  * Factory voor RailwayBoxen.

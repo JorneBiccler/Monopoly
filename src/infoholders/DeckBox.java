@@ -1,19 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package infoholders;
 
+import basicgameinfo.Card;
+import basicgameinfo.CardType;
+import basicgameinfo.Space;
 import java.util.List;
 import java.util.Random;
 import monopoly.*;
 
 /**
+ * Uitbreiding van SpecialBox die een deckobject bijhoudt en de gepaste actie
+ * zal uitvoeren.
  *
  * @author jorne
  */
@@ -28,10 +29,14 @@ public class DeckBox extends SpecialBox {
 
     }
 
+    /**
+     * Een rng trekt een kaart, indien het van het Jail type is wordt deze
+     * verwijderd en uiteindelijk wordt voor een willekeurige kaart de gepaste
+     * actie opgeroepen.
+     */
     @Override
     public void doAction(GameModel gameModel) {
         Card selectedCard = deck.get(rng.nextInt(deck.size()));;
-
         if (selectedCard.getType() == CardType.JAIL) {
             deck.remove(selectedCard);
         }

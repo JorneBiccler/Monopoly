@@ -3,7 +3,7 @@
  * Project: ugentopoly
  * Vak: Programmeren 2
  */
-package monopoly;
+package basicgameinfo;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * Klasse waarvan de objecten een plaats van het monopoly spel bijhouden i.h.b.
  * zo geschreven dat deze van JAXB gebruik kan maken
  *
- * @author jorne
+ * @author Jorne Biccler
  */
 public class Space {
 

@@ -24,16 +24,14 @@
 
 .label {
     -fx-wrap-text: true;
-    -fx-alignment: CENTER;
 }
 
 .spaceBox-selected {
-    -fx-background-color: transparent;
     -fx-border-color: PEACHPUFF;
     -fx-border-width: 3;
 }
 .spaceBox-unselected {
-    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-border-width: 3;
 }
 
@@ -57,4 +55,6 @@
     -fx-alignment: CENTER;
 }
 
-
+.blueBackground{
+    -fx-background-color: LIGHTSTEELBLUE;
+}

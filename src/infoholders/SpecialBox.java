@@ -5,7 +5,9 @@
  */
 package infoholders;
 
-import monopoly.Space;
+import basicgameinfo.Space;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * InfoBox horende bij 'speciale' types, bvb. START,JAIL,.. i.h.b. types waarbij
@@ -13,14 +15,25 @@ import monopoly.Space;
  *
  * @author Jorne Biccler
  */
-abstract class SpecialBox extends InfoBoxWithImage {
+abstract class SpecialBox extends InfoBox implements HasImage {
 
-    public SpecialBox(Space space, String propString ) {
+    private final Image image;
+    private final ImageView imageView = new ImageView();
+
+    public SpecialBox(Space space, String propString) {
         super(space, propString);
         String imagePath = "/resources/" + space.getType().toLowerCase() + ".png";
-        initializeImageView(imagePath);
+        image = new Image(imagePath);
+        imageView.setImage(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(130);
+        imageView.setPreserveRatio(true);
+        addNodeViewBox(imageView);
     }
 
-
+    @Override
+    public Image getImage() {
+        return image;
+    }
 
 }

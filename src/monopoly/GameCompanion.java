@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 /**
+ * Partnerklasse horende bij een GameComponent.
  *
  * @author Jorne Biccler
  */
@@ -25,18 +26,21 @@ public class GameCompanion {
     public TabPane playerTabPane;
     public ListView<String> logListView;
     public Label currentPlayer;
-    private  String initialCurrentPlayerStr;
-
-    
+    public Label jackpotLabel;
+    public Button diceButton;
+    private String initialCurrentPlayerStr;
+    private String initialJackpotLabelStr;
     private final Image backgroundImage = new Image("/resources/bord.png");
-    
-    public void setObservableLogListView(ObservableList<String> list){
-        logListView.setItems(list);
-    }
-    
+
     public void initialize() {
         backgroundView.setImage(backgroundImage);
         initialCurrentPlayerStr = currentPlayer.getText();
+        initialJackpotLabelStr= jackpotLabel.getText();
+        logListView.setItems(GameComponent.logListWrapper.getList());
+    }
+
+    public void setObservableLogListView(ObservableList<String> list) {
+        logListView.setItems(list);
     }
 
     public void fillBoardStackPane(Node node) {
@@ -50,14 +54,21 @@ public class GameCompanion {
     public void setRightBoxVisible() {
         rightVBox.setVisible(true);
     }
-    public void setCurrentPlayer(Player player){
+
+    public void setCurrentPlayer(Player player) {
         currentPlayer.setText(initialCurrentPlayerStr + player.getName());
     }
-    
-    
-    public void addNodeRightVBox(Node node){
+
+    public void addNodeRightVBox(Node node) {
         rightVBox.getChildren().add(node);
     }
+
+    public Button getDiceButton() {
+        return diceButton;
+    }
     
-    
+    public void setJackpot(int amount){
+        jackpotLabel.setText(initialJackpotLabelStr + amount);
+    }
+
 }

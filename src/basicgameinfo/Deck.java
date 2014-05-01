@@ -1,28 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
-
-package monopoly;
+package basicgameinfo;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
+ * Klasse die de standaard info rond een deck object bijhoudt i.h.b. zo
+ * opgesteld dat ze van JAXB gebruik kan maken.
  *
- * @author jorne
+ * @author Jorne Biccler
  */
 public class Deck {
+
     private List<Card> deckList;
     private SpaceType type;
-    
-    @XmlAttribute(name="type")
+
+    @XmlAttribute(name = "type")
     public void setType(SpaceType type) {
         this.type = type;
     }
@@ -31,8 +29,7 @@ public class Deck {
         return type;
     }
 
-
-    @XmlElement(name="card")
+    @XmlElement(name = "card")
     public List<Card> getDeckList() {
         return deckList;
     }
@@ -40,5 +37,5 @@ public class Deck {
     public void setDeckList(List<Card> deckList) {
         this.deckList = deckList;
     }
- 
+
 }

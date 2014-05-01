@@ -1,16 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package infoholders;
 
+import basicgameinfo.Space;
 import monopoly.GameModel;
-import monopoly.Space;
 
 /**
- *
- * @author jorne
+ * Uitbreiding van SpecialBox die correspondeert met het gevangennis vakje.
+ * @author Jorne Biccler
  */
 public class JailBox extends SpecialBox {
 
@@ -21,7 +21,7 @@ public class JailBox extends SpecialBox {
 
     @Override
     public void doAction(GameModel gameModel) {
-        gameModel.doGameAction();
+        gameModel.nextTurn();
     }
 
 }

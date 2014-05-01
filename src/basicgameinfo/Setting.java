@@ -3,7 +3,7 @@
  * Project: ugentopoly
  * Vak: Programmeren 2
  */
-package monopoly;
+package basicgameinfo;
 
 import javax.xml.bind.annotation.XmlAttribute;
 

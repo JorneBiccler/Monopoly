@@ -1,14 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- *//*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package gamecomponents;
 
+import basicgameinfo.SpaceType;
 import infoholders.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -17,11 +14,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
-import monopoly.SpaceType;
 
 /**
+ * Partner klasse horende bij een PlayerTabComponent, deze houdt de initiele
+ * tekst van de labels zoals gespecificieerd in het fxml bestand bij.
  *
- * @author jorne
+ * @author Jorne Biccler
  */
 public class PlayerTabComponentCompanion {
 
@@ -36,9 +34,12 @@ public class PlayerTabComponentCompanion {
 
     public PlayerTabComponentCompanion(ObservableList<InfoBox> ownedCardsList) {
         this.ownedCardsList = ownedCardsList;
-
     }
 
+    /**
+     * standaard initialize methode, merk op dat de listview een nieuwe
+     * cellFactory krijgt, deze geeft CardListCells terug.
+     */
     public void initialize() {
         initialBalanceString = balanceLabel.getText();
         initialPositionString = positionLabel.getText();
@@ -52,12 +53,11 @@ public class PlayerTabComponentCompanion {
             }
         });
     }
-    
-    public void changeOwnsJailCard(boolean ownsJailCard){
-        if(ownsJailCard){
+
+    public void changeOwnsJailCard(boolean ownsJailCard) {
+        if (ownsJailCard) {
             jailCardLabel.setText(initialJailCardString + "ja");
-        }
-        else{
+        } else {
             jailCardLabel.setText(initialJailCardString + "neen");
         }
     }
@@ -70,11 +70,15 @@ public class PlayerTabComponentCompanion {
         positionLabel.setText(initialPositionString + positionID);
     }
 
-    public class CardListCell extends ListCell<InfoBox> {
+    /**
+     * Binnenklasse die instelt hoe de cellen van de ListView eruit moeten zien
+     * deze hebben de gewenste graphic en tekst.
+     */
+    private class CardListCell extends ListCell<InfoBox> {
 
         @Override
         public void updateItem(InfoBox infoBox, boolean empty) {
-        super.updateItem(infoBox, empty);
+            super.updateItem(infoBox, empty);
             if (empty) {
                 setText(null);
                 setGraphic(null);
@@ -84,13 +88,13 @@ public class PlayerTabComponentCompanion {
                     setGraphic(new Rectangle(30, 30, tempBox.getColor()));
                     setText(infoBox.getPropString());
                 } else {
-                    PurchasableBoxWithImage tempBox = (PurchasableBoxWithImage) infoBox;
-                    ImageView tempImView = new ImageView(tempBox.getImage());
+                    HasImage hasImage = (HasImage) infoBox;
+                    ImageView tempImView = new ImageView(hasImage.getImage());
                     tempImView.setFitHeight(30);
                     tempImView.setFitWidth(30);
                     tempImView.setPreserveRatio(true);
                     setGraphic(tempImView);
-                    setText(tempBox.getPropString());
+                    setText(infoBox.getPropString());
                 }
             }
         }

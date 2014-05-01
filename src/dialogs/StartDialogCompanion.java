@@ -1,31 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package dialogs;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import monopoly.GameComponent;
 import monopoly.Player;
 
-/**
- *
- * @author jorne
- */
 public class StartDialogCompanion {
 
     public Button startButton;
@@ -46,20 +40,18 @@ public class StartDialogCompanion {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        
-                            gameComponent.initializeGame(playerObsList);
-                       
+                        gameComponent.initializeGame(playerObsList);
                         startButton.getScene().getWindow().hide();
                     }
                 });
-
-        startButton.disableProperty().bind(new DisableAddPlayerBinding());
+        startButton.setDisable(true);
+        playerObsList.addListener(new SomeDisableListener(2, "less", startButton));
+        playerObsList.addListener(new SomeDisableListener(3, "greater", addPlayerButton));
         addPlayerButton.setOnAction(new AddPlayerHandler());
-        startButton.disableProperty().bind(new DisableStartBinding());
         tokenColumn.setCellValueFactory(
                 new PropertyValueFactory<Player, ImageView>("tokenImageView"));
         nameColumn.setCellValueFactory(
-                new PropertyValueFactory<Player, String>("name"));       
+                new PropertyValueFactory<Player, String>("name"));
         tableView.setItems(playerObsList);
     }
 
@@ -67,44 +59,37 @@ public class StartDialogCompanion {
 
         @Override
         public void handle(ActionEvent event) {
-            Stage dialogStage = new Stage();
-            Scene dialogScene = new Scene(new AddPlayerDialogComponent(playerObsList));
-            dialogStage.setScene(dialogScene);
-            dialogStage.initStyle(StageStyle.UTILITY);
+            Stage dialogStage = new AddPlayerDialog(playerObsList);
             dialogStage.show();
 
         }
     }
 
-    private class DisableStartBinding extends BooleanBinding {
+    private class SomeDisableListener implements InvalidationListener {
 
-        public DisableStartBinding() {
-            bind(playerObsList);
+        private final String type;
+        private final int size;
+        private final Button someButton;
+
+        public SomeDisableListener(int size, String type, Button someButton) {
+            this.someButton = someButton;
+            this.type = type;
+            this.size = size;
+        }
+
+        public boolean computeValue() {
+            if (type.equals("less")) {
+                return playerObsList.size() < size;
+
+            } else {
+                return playerObsList.size() > size;
+            }
         }
 
         @Override
-        protected boolean computeValue() {
-            if (playerObsList.size() < 2) {
-                return true;
-            }
-            return false;
+        public void invalidated(Observable o) {
+            someButton.setDisable(computeValue());
         }
-
     }
 
-    private class DisableAddPlayerBinding extends BooleanBinding {
-
-        public DisableAddPlayerBinding() {
-            bind(Bindings.size(playerObsList));
-        }
-
-        @Override
-        protected boolean computeValue() {
-            if (playerObsList.size() >= 4) {
-                return true;
-            }
-            return false;
-        }
-
-    }
 }

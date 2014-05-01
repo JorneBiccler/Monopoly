@@ -2,10 +2,6 @@
  * Auteur: Jorne Biccler
  * Project: ugentopoly
  * Vak: Programmeren 2
- *//*
- * Auteur: Jorne Biccler
- * Project: ugentopoly
- * Vak: Programmeren 2
  */
 package monopoly;
 
@@ -28,8 +24,12 @@ public class MonopolyBoardCompanion {
     public StackPane infoStackPane;
   
 
+    /**
+     * Methode die een de elementen van de array in de gepaste volgorde plaatst
+     * in de bijhorende boxen.
+     * @param ar some array with nodes
+     */
     public void placeSpaceBoxes(Node[] ar) {
-
         hBoxDown.getChildren().add(ar[0]);
         hBoxUp.getChildren().add(ar[10]);
         for (int i = 1; i < 10; i++) {

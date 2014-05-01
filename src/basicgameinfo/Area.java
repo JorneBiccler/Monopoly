@@ -3,14 +3,16 @@
  * Project: ugentopoly
  * Vak: Programmeren 2
  */
-package monopoly;
+package basicgameinfo;
 
 import javafx.scene.paint.Color;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Klasse waarvan een object alle info rond 'areas' bijhoudt, in het bijzonder
- * is ze zo opgesteld dat ook JAXB er gebruik van kan maken
+ * is ze zo opgesteld dat ook JAXB er gebruik van kan maken. Er is ook een
+ * variabele numberOfStreets die kan gebruikt worden om in te stellen hoeveel
+ * straaten er bij deze area horen
  *
  * @author Jorne Biccler
  */
@@ -18,17 +20,22 @@ public class Area {
 
     private String id;
     private String colorString;
-    private int rentMultiplier;
+    private int numberOfStreets = 0;
 
-    public int getRentMultiplier() {
-        return rentMultiplier;
+    public int getNumberOfStreets() {
+        return numberOfStreets;
     }
 
-    public void setRentMultiplier(int rentMultiplier) {
-        this.rentMultiplier = rentMultiplier;
+    /**
+     * Tel één op bij het aantal straten
+     */
+    public void incrementNumberOfStreets() {
+        numberOfStreets++;
     }
 
-
+    /**
+     * Converter van de colorString naar het gepaste kleur.
+     */
     public Color getAreaColor() {
         Color color = Color.web(colorString);
         return color;

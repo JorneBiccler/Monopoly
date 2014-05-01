@@ -1,16 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 
 package infoholders;
 
-import monopoly.Space;
+import basicgameinfo.Space;
 
 /**
- *
- * @author jorne
+ * Factory voor JailBoxen.
+ * @author Jorne Biccler
  */
 public class JailBoxFactory implements InfoBoxFactory{
 
