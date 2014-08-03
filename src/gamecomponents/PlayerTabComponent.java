@@ -72,8 +72,8 @@ public class PlayerTabComponent extends VBox implements InvalidationListener {
      * positie.
      */
     private void changePositionLabel(int position) {
-        String propertyKey = MonopolyBoardComponent.board.getSpaceIdMap().get(position);
-        companion.changePosition(MonopolyBoardComponent.boardProperties.getProperty(propertyKey));
+        String propertyKey = MonopolyBoardComponent.BOARD.getSpaceIdMap().get(position);
+        companion.changePosition(MonopolyBoardComponent.BOARDPROPERTIES.getProperty(propertyKey));
     }
 
 }

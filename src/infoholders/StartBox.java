@@ -28,7 +28,7 @@ public class StartBox extends SpecialBox{
      */
     @Override
     public void doAction(GameModel gameModel) {
-        gameModel.getCurrentPlayer().increaseBalance(MonopolyBoardComponent.board.getSettings().getGo());
+        gameModel.getCurrentPlayer().increaseBalance(MonopolyBoardComponent.BOARD.getSettings().getGo());
         gameModel.nextTurn();
     }
     

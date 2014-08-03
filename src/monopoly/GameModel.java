@@ -2,6 +2,10 @@
  * Auteur: Jorne Biccler
  * Project: ugentopoly
  * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package monopoly;
 
@@ -20,7 +24,7 @@ import javafx.collections.ObservableList;
  */
 public class GameModel implements Observable {
 
-    private final List<InvalidationListener> listerners = new ArrayList<>();
+    private final List<InvalidationListener> listeners = new ArrayList<>();
     private final List<Player> listOfPlayers;
     private int selectedPosition;
     private Player currentPlayer;
@@ -83,16 +87,16 @@ public class GameModel implements Observable {
 
     @Override
     public void addListener(InvalidationListener il) {
-        listerners.add(il);
+        listeners.add(il);
     }
 
     @Override
     public void removeListener(InvalidationListener il) {
-        listerners.remove(il);
+        listeners.remove(il);
     }
 
     public void fireInvalidationEvent() {
-        for (InvalidationListener il : listerners) {
+        for (InvalidationListener il : listeners) {
             il.invalidated(this);
         }
     }
@@ -121,7 +125,7 @@ public class GameModel implements Observable {
      */
     public void setCurrentPlayerPosition(int newPosition, boolean collect, boolean canDoAction) {
         if (newPosition < getCurrentPlayerPosition() && collect) {
-            currentPlayer.increaseBalance(MonopolyBoardComponent.board.getSettings().getGo());
+            currentPlayer.increaseBalance(MonopolyBoardComponent.BOARD.getSettings().getGo());
             GameComponent.logListWrapper.addMessage("passStart", new String[]{currentPlayer.getName()});
         }
         currentPlayer.setCurrentPosition(newPosition);
@@ -180,7 +184,7 @@ public class GameModel implements Observable {
      * speler. Zie ook setCurrentPlayerPosition()
      */
     public void relativeCurrentPlayerPositionChange(int amount, boolean collect, boolean canDoAction) {
-        int size = MonopolyBoardComponent.board.getSettings().getSize();
+        int size = MonopolyBoardComponent.BOARD.getSettings().getSize();
         int newPos = (currentPlayer.getCurrentPosition() + amount) % size;
         if (amount >= 0) {
             setCurrentPlayerPosition(newPos, true, canDoAction);

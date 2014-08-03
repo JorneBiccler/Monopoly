@@ -2,6 +2,18 @@
  * Auteur: Jorne Biccler
  * Project: ugentopoly
  * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package dialogs;
 
@@ -24,7 +36,7 @@ import monopoly.Token;
  */
 public class AddPlayerDialogCompanion {
 
-    private static final Token[] tokenAr = {
+    private static final Token[] TOKENAR = {
         new Token("/resources/token1.png", "Wina"),
         new Token("/resources/token2.png", "VTK"),
         new Token("/resources/token3.png", "Chemica"),
@@ -49,7 +61,7 @@ public class AddPlayerDialogCompanion {
      */
     public AddPlayerDialogCompanion(ObservableList<Player> playerList) {
         obsList = FXCollections.observableArrayList();
-        for (Token token : tokenAr) {
+        for (Token token : TOKENAR) {
             boolean avaible = true;
             for (Player pl : playerList) {
                 if (token == pl.getToken()) {
@@ -122,18 +134,18 @@ public class AddPlayerDialogCompanion {
     private final Callback<ListView<Token>, ListCell<Token>> cellFactory = new Callback<ListView<Token>, ListCell<Token>>() {
         @Override
         public ListCell<Token> call(ListView<Token> p) {
-            return new tokenCell();
+            return new TokenCell();
         }
     };
 
     /*
      * de cell bevat de gewenste imageview als grphic en als text de gewenste tekst.
      */
-    private class tokenCell extends ListCell<Token> {
+    private class TokenCell extends ListCell<Token> {
 
         private final ImageView imageView = new ImageView();
 
-        public tokenCell() {
+        public TokenCell() {
             imageView.setFitHeight(20);
             imageView.setPreserveRatio(true);
         }

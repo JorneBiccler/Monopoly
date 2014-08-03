@@ -2,6 +2,18 @@
  * Auteur: Jorne Biccler
  * Project: ugentopoly
  * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package dialogs;
 
@@ -44,12 +56,12 @@ public class ActionDialogCompanion {
     public void initialize() {
         infoPropLabel.setText(infoProp);
         actionQuestionLabel.setText(actionInfo);
-        yesButton.setOnAction(new finalYesHandler());
-        noButton.setOnAction(new finalNoHandler());
+        yesButton.setOnAction(new FINALYESHANDLER());
+        noButton.setOnAction(new FINALNOHANDLER());
         yesButton.disableProperty().bind(disableYesButton);
     }
 
-    class finalYesHandler implements EventHandler<ActionEvent> {
+    class FINALYESHANDLER implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent t) {
@@ -59,7 +71,7 @@ public class ActionDialogCompanion {
 
     }
 
-    class finalNoHandler implements EventHandler<ActionEvent> {
+    class FINALNOHANDLER implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent t) {

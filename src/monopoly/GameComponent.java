@@ -42,7 +42,6 @@ public class GameComponent extends HBox implements InvalidationListener {
             loader.setRoot(this);
             this.companion = new GameCompanion();
             loader.setController(companion);
-
             loader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);

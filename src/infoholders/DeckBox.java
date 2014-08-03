@@ -21,7 +21,7 @@ import monopoly.*;
 public class DeckBox extends SpecialBox {
 
     private List<Card> deck;
-    private static final Random rng = new Random();
+    private final Random rng = new Random();
 
     public DeckBox(Space space, String propString, List<Card> deck) {
         super(space, propString);
@@ -36,7 +36,7 @@ public class DeckBox extends SpecialBox {
      */
     @Override
     public void doAction(GameModel gameModel) {
-        Card selectedCard = deck.get(rng.nextInt(deck.size()));;
+        Card selectedCard = deck.get(rng.nextInt(deck.size()));
         if (selectedCard.getType() == CardType.JAIL) {
             deck.remove(selectedCard);
         }

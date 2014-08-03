@@ -3,6 +3,8 @@
  * Project: ugentopoly
  * Vak: Programmeren 2
  */
+
+
 package monopoly;
 
 import basicgameinfo.*;
@@ -31,33 +33,33 @@ public class MonopolyBoardComponent extends StackPane {
     private final GameModel gameModel;
     private final Node[] boxAr = new Node[40];
     private final Map<SpaceType, List<Card>> deckMap = new EnumMap<>(SpaceType.class);
-    private static final Map<SpaceType, InfoBoxFactory> infoFactoryMap;
-    public static final Board board;
-    public static final Properties boardProperties;
+    private static final Map<SpaceType, InfoBoxFactory> INFOFACTORYMAP;
+    public static final Board BOARD;
+    public static final Properties BOARDPROPERTIES;
 
     /**
      * static initialise van de statische variabelen, in het bijzonder wordt ook
      * de .initialize() methode van het board element opgeroepen.
      */
     static {
-        infoFactoryMap = new EnumMap<>(SpaceType.class);
-        infoFactoryMap.put(SpaceType.START, new StartBoxFactory());
-        infoFactoryMap.put(SpaceType.JAIL, new JailBoxFactory());
-        infoFactoryMap.put(SpaceType.FREE_PARKING, new FreeParkingBoxFactory());
-        infoFactoryMap.put(SpaceType.GO_TO_JAIL, new GoToJailBoxFactory());
-        infoFactoryMap.put(SpaceType.UTILITY, new UtilityBoxFactory());
-        infoFactoryMap.put(SpaceType.TAX, new TaxBoxFactory());
-        infoFactoryMap.put(SpaceType.RAILWAY, new RailwayBoxFactory());
+        INFOFACTORYMAP = new EnumMap<>(SpaceType.class);
+        INFOFACTORYMAP.put(SpaceType.START, new StartBoxFactory());
+        INFOFACTORYMAP.put(SpaceType.JAIL, new JailBoxFactory());
+        INFOFACTORYMAP.put(SpaceType.FREE_PARKING, new FreeParkingBoxFactory());
+        INFOFACTORYMAP.put(SpaceType.GO_TO_JAIL, new GoToJailBoxFactory());
+        INFOFACTORYMAP.put(SpaceType.UTILITY, new UtilityBoxFactory());
+        INFOFACTORYMAP.put(SpaceType.TAX, new TaxBoxFactory());
+        INFOFACTORYMAP.put(SpaceType.RAILWAY, new RailwayBoxFactory());
 
-        boardProperties = new Properties();
+        BOARDPROPERTIES = new Properties();
         try {
-            boardProperties.load(MonopolyBoardComponent.class.getResourceAsStream("/resources/ugentopoly.properties"));
+            BOARDPROPERTIES.load(MonopolyBoardComponent.class.getResourceAsStream("/resources/ugentopoly.properties"));
             JAXBContext jc = JAXBContext.newInstance(Board.class);
-            board = (Board) jc.createUnmarshaller().unmarshal(Board.class.getResource("/resources/monopoly.xml"));
+            BOARD = (Board) jc.createUnmarshaller().unmarshal(Board.class.getResource("/resources/monopoly.xml"));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        board.intialize();
+        BOARD.intialize();
     }
 
     public MonopolyBoardComponent(GameModel gameModel) {
@@ -96,13 +98,13 @@ public class MonopolyBoardComponent extends StackPane {
     }
 
     private void fillAreaMap() {
-        for (Area area : board.getAreas()) {
+        for (Area area : BOARD.getAreas()) {
             areaMap.put(area.getId(), area);
         }
     }
 
     private void fillDeckMap() {
-        for (Deck deck : board.getDecks()) {
+        for (Deck deck : BOARD.getDecks()) {
             deckMap.put(deck.getType(), deck.getDeckList());
         }
     }
@@ -112,17 +114,17 @@ public class MonopolyBoardComponent extends StackPane {
      * plaatst.
      */
     private void fillInfoList() {
-        for (Space space : board.getSpaces()) {
+        for (Space space : BOARD.getSpaces()) {
             InfoBox tempBox;
-            if (infoFactoryMap.containsKey(space.getType())) {
-                tempBox = infoFactoryMap.get(space.getType()).create(space,
-                        boardProperties.getProperty(space.getId()));
+            if (INFOFACTORYMAP.containsKey(space.getType())) {
+                tempBox = INFOFACTORYMAP.get(space.getType()).create(space,
+                        BOARDPROPERTIES.getProperty(space.getId()));
                 infoList.add(tempBox);
             } else if (space.getType() == SpaceType.STREET) {
-                tempBox = new StreetBox(space, boardProperties.getProperty(space.getId()),
+                tempBox = new StreetBox(space, BOARDPROPERTIES.getProperty(space.getId()),
                         areaMap.get(space.getArea()));
             } else {
-                tempBox = new DeckBox(space, boardProperties.getProperty(space.getId()),
+                tempBox = new DeckBox(space, BOARDPROPERTIES.getProperty(space.getId()),
                         deckMap.get(space.getType()));
             }
             infoList.add(space.getPosition(), tempBox);

@@ -44,7 +44,7 @@ public class Player implements Observable {
         this.name = name;
         this.color = color;
         this.token = token;
-        this.balance = MonopolyBoardComponent.board.getSettings().getBalance();
+        this.balance = MonopolyBoardComponent.BOARD.getSettings().getBalance();
         this.tokenImageView = new ImageView(token.getImage());
         tokenImageView.setFitHeight(25);
         tokenImageView.setFitWidth(15);
@@ -75,7 +75,7 @@ public class Player implements Observable {
     public boolean useJailCard() {
         boolean usedCard = false;
         if (isInJail()) {
-            for (Deck deck : MonopolyBoardComponent.board.getDecks()) {
+            for (Deck deck : MonopolyBoardComponent.BOARD.getDecks()) {
                 if (jailCardMap.containsKey(deck.getType()) && !usedCard) {
                     deck.getDeckList().add(jailCardMap.get(deck.getType()));
                     jailCardMap.remove(deck.getType());

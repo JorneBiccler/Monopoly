@@ -149,7 +149,7 @@ public enum CardType {
 
     private static void createInfoDialog(Card card, SpaceType type, EventHandler<Event> okHandler) {
         Stage infoDialog = new InfoDialog(
-                MonopolyBoardComponent.boardProperties.getProperty(card.getId()), type.toLowerCase() + "kaart", okHandler);
+                MonopolyBoardComponent.BOARDPROPERTIES.getProperty(card.getId()), type.toLowerCase() + "kaart", okHandler);
         infoDialog.show();
     }
 

@@ -2,6 +2,10 @@
  * Auteur: Jorne Biccler
  * Project: ugentopoly
  * Vak: Programmeren 2
+ *//*
+ * Auteur: Jorne Biccler
+ * Project: ugentopoly
+ * Vak: Programmeren 2
  */
 package spacebox;
 
@@ -81,7 +85,7 @@ public class SpaceBox extends StackPane implements InvalidationListener {
         setPrefSize(spaceBoxPos.getWidth(), spaceBoxPos.getHeight());
         getStyleClass().add(spaceBoxPos.getCSSClass());
         this.gameModel.addListener(this);
-        setOnMouseClicked(new spaceBoxClickHandler());
+        setOnMouseClicked(new SpaceBoxClickHandler());
         for (Player pl : gameModel.getListOfPlayers()) {
             if (pl.getCurrentPosition() == position) {
                 companion.addFlowPaneChild(pl.getTokenImageView());
@@ -133,7 +137,7 @@ public class SpaceBox extends StackPane implements InvalidationListener {
     /**
      * MouseEvent handler, die de selectie aanpast via de invertSelection() methode.
      */
-    private class spaceBoxClickHandler implements EventHandler<MouseEvent> {
+    private class SpaceBoxClickHandler implements EventHandler<MouseEvent> {
 
         @Override
         public void handle(MouseEvent t) {
